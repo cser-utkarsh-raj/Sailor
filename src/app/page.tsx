@@ -5,8 +5,18 @@ import Link from "next/link";
 import SailorLogo from "@/components/illustrations/SailorLogo";
 import DotLogo from "@/components/illustrations/DotLogo";
 import Button from "@/components/ui/Button";
+import { useState, useEffect } from "react";
 
 export default function LandingPage() {
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    });
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-[#FDFBF7] overflow-x-hidden font-sans">
       
@@ -173,9 +183,8 @@ export default function LandingPage() {
             <h1 className="font-heading text-6xl md:text-7xl lg:text-[6rem] font-extrabold text-slate-800 tracking-tight uppercase leading-[0.95] mb-4 md:mb-6">
               Go Offshore
             </h1>
-            <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-slate-600 mb-8 md:mb-10 leading-snug italic">
-              Sail anonymously.<br/>
-              Meet someone new.
+            <p className="font-sans font-medium tracking-[0.2em] uppercase text-sm md:text-base text-slate-500 mb-8 md:mb-10">
+              Go offshore, meet your people.
             </p>
             
             <div className="flex flex-col sm:flex-row items-start gap-4">
@@ -202,7 +211,20 @@ export default function LandingPage() {
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Swapped "Log In / Sign Up" for an anonymous-first approach */}
+            {deferredPrompt && (
+              <button 
+                onClick={() => {
+                  deferredPrompt.prompt();
+                  deferredPrompt.userChoice.then((choiceResult: any) => {
+                    if (choiceResult.outcome === 'accepted') setDeferredPrompt(null);
+                  });
+                }}
+                className="hidden md:flex items-center gap-2 text-slate-700 hover:text-sky-600 font-bold tracking-widest uppercase text-xs transition-colors"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Install App
+              </button>
+            )}
             <Link href="/onboarding">
               <Button className="rounded-full bg-slate-900 text-white hover:bg-sky-600 hover:-translate-y-0.5 hover:shadow-lg transition-all font-bold uppercase tracking-widest text-xs md:text-sm px-8 py-2.5 border-none">
                 Start Sailing
