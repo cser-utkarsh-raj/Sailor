@@ -1,0 +1,48 @@
+import { Bottle } from '@/types';
+
+export const mockBottles: Bottle[] = [
+  {
+    id: 'bottle-001',
+    senderId: 'sailor-003',
+    senderCountryFlag: '🇧🇷',
+    recipientId: 'current-user',
+    message: 'What\'s one thing you want to accomplish this year?',
+    status: 'unread',
+    sentAt: '2026-08-26T14:30:00Z',
+    readAt: null,
+    repliedAt: null,
+  },
+  {
+    id: 'bottle-002',
+    senderId: 'sailor-004',
+    senderCountryFlag: '🇲🇦',
+    recipientId: 'current-user',
+    message: 'I just saw the most beautiful sunset and thought I\'d share the feeling with a stranger.',
+    status: 'unread',
+    sentAt: '2026-08-25T20:15:00Z',
+    readAt: null,
+    repliedAt: null,
+  },
+  {
+    id: 'bottle-003',
+    senderId: 'sailor-006',
+    senderCountryFlag: '🇰🇷',
+    recipientId: 'current-user',
+    message: 'What song are you listening to right now? Send it back in a bottle!',
+    status: 'read',
+    sentAt: '2026-08-24T09:00:00Z',
+    readAt: '2026-08-24T11:30:00Z',
+    repliedAt: null,
+  },
+  {
+    id: 'bottle-004',
+    senderId: 'sailor-007',
+    senderCountryFlag: '🇨🇦',
+    recipientId: 'current-user',
+    message: 'If you could have dinner with anyone, living or dead, who would it be and why?',
+    status: 'replied',
+    sentAt: '2026-08-22T16:45:00Z',
+    readAt: '2026-08-22T18:00:00Z',
+    repliedAt: '2026-08-22T18:15:00Z',
+  },
+];

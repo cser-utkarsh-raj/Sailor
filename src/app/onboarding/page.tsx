@@ -1,0 +1,401 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "motion/react";
+import { ChevronLeft } from "lucide-react";
+import { useSailor } from "@/lib/store/sailor-context";
+import SailorLogo from "@/components/illustrations/SailorLogo";
+import WaveBackground from "@/components/illustrations/WaveBackground";
+import Button from "@/components/ui/Button";
+import Badge from "@/components/ui/Badge";
+import { Input } from "@/components/ui/Input";
+
+const COUNTRIES = [
+  { name: "India", flag: "🇮🇳" },
+  { name: "USA", flag: "🇺🇸" },
+  { name: "UK", flag: "🇬🇧" },
+  { name: "Japan", flag: "🇯🇵" },
+  { name: "Brazil", flag: "🇧🇷" },
+  { name: "Germany", flag: "🇩🇪" },
+  { name: "France", flag: "🇫🇷" },
+  { name: "South Korea", flag: "🇰🇷" },
+  { name: "Canada", flag: "🇨🇦" },
+  { name: "Australia", flag: "🇦🇺" },
+  { name: "Mexico", flag: "🇲🇽" },
+  { name: "Nigeria", flag: "🇳🇬" },
+];
+
+const LANGUAGES = [
+  "English", "Hindi", "Spanish", "French", "Japanese", "Korean",
+  "Portuguese", "German", "Arabic", "Mandarin", "Russian", "Italian"
+];
+
+import { 
+  Music, Book, Gamepad2, Moon, Plane, ChefHat, 
+  Camera, Palette, Laptop, Trophy, Heart, Clapperboard, 
+  Leaf, Cat, Lightbulb, Guitar 
+} from 'lucide-react';
+
+const INTERESTS = [
+  { label: "Music", icon: <Music size={18} /> },
+  { label: "Books", icon: <Book size={18} /> },
+  { label: "Gaming", icon: <Gamepad2 size={18} /> },
+  { label: "Night Owl", icon: <Moon size={18} /> },
+  { label: "Travel", icon: <Plane size={18} /> },
+  { label: "Cooking", icon: <ChefHat size={18} /> },
+  { label: "Photography", icon: <Camera size={18} /> },
+  { label: "Art", icon: <Palette size={18} /> },
+  { label: "Tech", icon: <Laptop size={18} /> },
+  { label: "Sports", icon: <Trophy size={18} /> },
+  { label: "Wellness", icon: <Heart size={18} /> },
+  { label: "Movies", icon: <Clapperboard size={18} /> },
+  { label: "Nature", icon: <Leaf size={18} /> },
+  { label: "Animals", icon: <Cat size={18} /> },
+  { label: "Philosophy", icon: <Lightbulb size={18} /> },
+  { label: "Instruments", icon: <Guitar size={18} /> },
+];
+
+export default function OnboardingPage() {
+  const router = useRouter();
+  const { setIsOnboarded, setCurrentProfile, currentUser } = useSailor();
+  
+  const [step, setStep] = useState(0);
+  
+  // Form State
+  const [name, setName] = useState("");
+  const [isAnonymous, setIsAnonymous] = useState(false);
+  const [country, setCountry] = useState<{name: string, flag: string} | null>(null);
+  const [languages, setLanguages] = useState<string[]>([]);
+  const [interests, setInterests] = useState<string[]>([]);
+
+  const handleNext = () => setStep((s) => Math.min(s + 1, 5));
+  const handleBack = () => setStep((s) => Math.max(s - 1, 0));
+
+  const handleComplete = () => {
+    setCurrentProfile({
+      userId: currentUser?.id || `user-${Date.now()}`,
+      sailorName: name || "Anonymous Sailor",
+      isAnonymous,
+      country: country?.name || "Unknown",
+      countryFlag: country?.flag || "🏴‍☠️",
+      languages,
+      interests,
+      createdAt: new Date().toISOString(),
+      bio: "Sailing the digital seas.",
+      conversationPreferences: ['deep'],
+      avatarColor: 'ocean-500'
+    });
+    setIsOnboarded(true);
+    router.push("/sea");
+  };
+
+  const toggleLanguage = (lang: string) => {
+    setLanguages((prev) => 
+      prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]
+    );
+  };
+
+  const toggleInterest = (interest: string) => {
+    setInterests((prev) => {
+      if (prev.includes(interest)) return prev.filter((i) => i !== interest);
+      if (prev.length >= 6) return prev;
+      return [...prev, interest];
+    });
+  };
+
+  const stepVariants = {
+    initial: { opacity: 0, x: 50 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -50 }
+  };
+
+  return (
+    <div className="relative min-h-screen bg-white overflow-hidden flex flex-col">
+      {/* Progress Bar */}
+      {step > 0 && (
+        <div className="absolute top-8 left-0 right-0 z-50 flex justify-center gap-2">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div 
+              key={i} 
+              className={`h-2 w-2 rounded-full transition-colors ${
+                i <= step ? "bg-ocean-500" : "bg-ocean-100"
+              }`} 
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Back Button */}
+      {step > 0 && step < 5 && (
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={handleBack}
+          className="absolute top-6 left-6 z-50 text-navy-600"
+        >
+          <ChevronLeft className="w-5 h-5 mr-1" /> Back
+        </Button>
+      )}
+
+      <div className="flex-1 flex flex-col justify-center items-center px-6 relative z-10 w-full max-w-lg mx-auto">
+        <AnimatePresence mode="wait">
+          {step === 0 && (
+            <motion.div 
+              key="step0"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="text-center w-full flex flex-col items-center"
+            >
+              <SailorLogo className="w-20 h-20 text-ocean-500 mb-6" />
+              <h1 className="font-heading font-extrabold text-3xl md:text-4xl text-navy-900 mb-3">
+                Welcome aboard, Sailor!
+              </h1>
+              <p className="text-navy-600 text-lg mb-2">
+                Create your identity and set sail.
+              </p>
+              <p className="text-navy-500 italic text-sm mb-10">
+                You can meet people without revealing your real identity.
+              </p>
+              <Button size="lg" className="w-full sm:w-auto px-12" onClick={handleNext}>
+                Let's Begin
+              </Button>
+            </motion.div>
+          )}
+
+          {step === 1 && (
+            <motion.div 
+              key="step1"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full flex flex-col items-center text-center"
+            >
+              <h2 className="font-heading font-bold text-2xl md:text-3xl text-navy-900 mb-8">
+                Choose your Sailor name
+              </h2>
+              <Input 
+                value={name} 
+                onChange={(e) => setName(e.target.value)} 
+                placeholder="e.g. Captain Luna" 
+                className="w-full text-center text-lg py-6 mb-6"
+              />
+              <label className="flex items-center gap-3 cursor-pointer mb-2">
+                <input 
+                  type="checkbox" 
+                  checked={isAnonymous} 
+                  onChange={(e) => setIsAnonymous(e.target.checked)}
+                  className="w-5 h-5 rounded border-navy-300 text-ocean-500 focus:ring-ocean-500"
+                />
+                <span className="font-medium text-navy-700">Stay Anonymous</span>
+              </label>
+              <p className="text-navy-500 text-sm mb-10">Your real name is never shared</p>
+              
+              <Button 
+                size="lg" 
+                className="w-full" 
+                onClick={handleNext}
+                disabled={!name.trim() && !isAnonymous}
+              >
+                Continue
+              </Button>
+            </motion.div>
+          )}
+
+          {step === 2 && (
+            <motion.div 
+              key="step2"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full flex flex-col items-center"
+            >
+              <h2 className="font-heading font-bold text-2xl md:text-3xl text-navy-900 mb-8 text-center">
+                Where are you from?
+              </h2>
+              
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 w-full mb-6">
+                {COUNTRIES.map((c) => (
+                  <button
+                    key={c.name}
+                    onClick={() => setCountry(c)}
+                    className={`flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all ${
+                      country?.name === c.name 
+                        ? 'border-ocean-500 bg-ocean-50' 
+                        : 'border-slate-200 bg-white hover:border-ocean-200 hover:bg-ocean-50/50'
+                    }`}
+                  >
+                    <span className="text-3xl mb-2">{c.flag}</span>
+                    <span className="text-xs font-medium text-navy-700 text-center">{c.name}</span>
+                  </button>
+                ))}
+              </div>
+              
+              <p className="text-navy-500 text-sm mb-8 text-center">Your exact location is never shared</p>
+              
+              <Button 
+                size="lg" 
+                className="w-full" 
+                onClick={handleNext}
+                disabled={!country}
+              >
+                Continue
+              </Button>
+            </motion.div>
+          )}
+
+          {step === 3 && (
+            <motion.div 
+              key="step3"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full flex flex-col items-center"
+            >
+              <h2 className="font-heading font-bold text-2xl md:text-3xl text-navy-900 mb-8 text-center">
+                What languages do you speak?
+              </h2>
+              
+              <div className="flex flex-wrap justify-center gap-3 w-full mb-10">
+                {LANGUAGES.map((lang) => {
+                  const isSelected = languages.includes(lang);
+                  return (
+                    <button key={lang} onClick={() => toggleLanguage(lang)}>
+                      <Badge 
+                        variant={isSelected ? 'ocean' : 'default'}
+                        className={`text-sm py-2 px-4 cursor-pointer transition-all ${
+                          isSelected ? 'scale-105' : 'hover:bg-slate-200'
+                        }`}
+                      >
+                        {lang}
+                      </Badge>
+                    </button>
+                  );
+                })}
+              </div>
+              
+              <Button 
+                size="lg" 
+                className="w-full" 
+                onClick={handleNext}
+                disabled={languages.length === 0}
+              >
+                Continue
+              </Button>
+            </motion.div>
+          )}
+
+          {step === 4 && (
+            <motion.div 
+              key="step4"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full flex flex-col items-center"
+            >
+              <h2 className="font-heading font-bold text-2xl md:text-3xl text-navy-900 mb-2 text-center">
+                What are you into?
+              </h2>
+              <p className="text-navy-500 mb-8 text-center">Pick up to 6 interests</p>
+              
+              <div className="flex flex-wrap justify-center gap-3 w-full mb-10">
+                {INTERESTS.map((interest) => {
+                  const isSelected = interests.includes(interest.label);
+                  return (
+                    <button key={interest.label} onClick={() => toggleInterest(interest.label)}>
+                      <Badge 
+                        className={`text-sm py-2 px-4 cursor-pointer transition-all flex items-center gap-2 ${
+                          isSelected 
+                            ? 'bg-coral-100 text-coral-700 border-coral-300 scale-105 shadow-sm' 
+                            : 'hover:bg-slate-200 bg-white border border-slate-200 text-navy-700'
+                        }`}
+                      >
+                        <span>{interest.icon}</span>
+                        {interest.label}
+                      </Badge>
+                    </button>
+                  );
+                })}
+              </div>
+              
+              <Button 
+                size="lg" 
+                className="w-full" 
+                onClick={handleNext}
+                disabled={interests.length === 0}
+              >
+                Continue
+              </Button>
+            </motion.div>
+          )}
+
+          {step === 5 && (
+            <motion.div 
+              key="step5"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full flex flex-col items-center text-center"
+            >
+              <motion.div 
+                animate={{ y: [0, -10, 0] }} 
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="mb-6"
+              >
+                <SailorLogo className="w-[100px] h-[100px] text-ocean-600" />
+              </motion.div>
+              
+              <h2 className="font-heading font-extrabold text-3xl md:text-4xl text-navy-900 mb-8">
+                You're ready to sail!
+              </h2>
+              
+              <div className="bg-ocean-50 border border-ocean-100 rounded-2xl p-6 w-full mb-10 text-left">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-4xl">{country?.flag}</span>
+                  <div>
+                    <h3 className="font-bold text-navy-900 text-xl">{name || 'Anonymous Sailor'}</h3>
+                    <p className="text-navy-600 text-sm">{country?.name}</p>
+                  </div>
+                </div>
+                
+                <div className="mb-4">
+                  <p className="text-xs text-navy-500 font-semibold uppercase tracking-wider mb-2">Speaks</p>
+                  <div className="flex flex-wrap gap-2">
+                    {languages.map(l => <span key={l} className="text-sm text-navy-700 bg-white px-2 py-1 rounded shadow-sm">{l}</span>)}
+                  </div>
+                </div>
+                
+                <div>
+                  <p className="text-xs text-navy-500 font-semibold uppercase tracking-wider mb-2">Into</p>
+                  <div className="flex flex-wrap gap-2">
+                    {interests.map(i => <span key={i} className="text-sm text-navy-700 bg-white px-2 py-1 rounded shadow-sm">{i}</span>)}
+                  </div>
+                </div>
+              </div>
+              
+              <Button 
+                size="lg" 
+                className="w-full bg-coral-500 hover:bg-coral-600 text-white text-lg font-bold shadow-lg hover:shadow-xl transition-all" 
+                onClick={handleComplete}
+              >
+                Set Sail
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Wave Background */}
+      <div className="absolute bottom-0 left-0 right-0 z-0 opacity-50 pointer-events-none">
+        <WaveBackground variant="subtle" />
+      </div>
+    </div>
+  );
+}
