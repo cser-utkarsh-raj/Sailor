@@ -3,118 +3,279 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import SailorLogo from "@/components/illustrations/SailorLogo";
+import DotLogo from "@/components/illustrations/DotLogo";
 import Button from "@/components/ui/Button";
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen bg-white overflow-x-hidden font-sans">
+    <div className="relative min-h-screen bg-[#FDFBF7] overflow-x-hidden font-sans">
       
       {/* 
-        Top Image Section with Curved Mask
-        Matches the "Look Deep Into Nature" double screen UI.
+        ==================================================
+        HERO SCENE: VECTOR ILLUSTRATED LANDSCAPE
+        ==================================================
       */}
-      <div className="relative w-full h-[65vh] lg:h-[75vh] bg-sky-900">
+      <div className="relative w-full h-[85vh] lg:h-[100vh] bg-gradient-to-b from-[#e0f2fe] to-[#bae6fd] overflow-hidden">
         
-        {/* The Boat/Shore Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518182170546-076616fd6251?q=80&w=2000')" }}
-        />
-        {/* A subtle blue overlay to ensure text/nav visibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-sky-900/60 via-transparent to-transparent" />
+        {/* BACKGROUND: Sky & Clouds */}
+        <div className="absolute top-10 left-10 opacity-60">
+          <svg width="120" height="40" viewBox="0 0 120 40" fill="#ffffff">
+             <path d="M20 20 C20 10 35 10 40 15 C50 0 70 0 80 15 C90 10 110 15 105 25 C115 30 110 40 95 40 L20 40 C5 40 5 25 20 20 Z" />
+          </svg>
+        </div>
+        <div className="absolute top-24 right-32 opacity-40 scale-75">
+          <svg width="120" height="40" viewBox="0 0 120 40" fill="#ffffff">
+             <path d="M20 20 C20 10 35 10 40 15 C50 0 70 0 80 15 C90 10 110 15 105 25 C115 30 110 40 95 40 L20 40 C5 40 5 25 20 20 Z" />
+          </svg>
+        </div>
 
-        {/* Header / Navigation */}
-        <nav className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-12 text-white">
-          <div className="flex gap-8 items-center text-xs md:text-sm font-bold uppercase tracking-widest pt-8">
-            <Link href="/" className="hover:text-sky-200 transition-colors">Home</Link>
-            <Link href="/blog" className="hover:text-sky-200 transition-colors hidden sm:block">Blog</Link>
-            <Link href="/faq" className="hover:text-sky-200 transition-colors hidden sm:block">FAQ</Link>
-          </div>
+        {/* DISTANT MOUNTAINS / ISLANDS */}
+        <div className="absolute top-[25%] left-0 w-full h-[30%] z-0">
+          <svg viewBox="0 0 1440 300" className="w-full h-full" preserveAspectRatio="none">
+            {/* Mountain Layer 1 */}
+            <path d="M0,300 L0,200 C200,100 400,250 600,150 C800,50 1000,200 1440,100 L1440,300 Z" fill="#93c5fd" opacity="0.6"/>
+            {/* Mountain Layer 2 */}
+            <path d="M0,300 L0,250 C300,150 500,250 800,100 C1100,-50 1300,150 1440,200 L1440,300 Z" fill="#7dd3fc" opacity="0.8"/>
+          </svg>
+        </div>
+
+        {/* MIDDLE GROUND: Ocean Horizon & Waves */}
+        <div className="absolute top-[45%] left-0 w-full h-[55%] z-10 bg-gradient-to-b from-[#38bdf8] to-[#0284c7]">
+           {/* Decorative ocean waves */}
+           <svg viewBox="0 0 1440 100" className="absolute top-0 w-full opacity-30" preserveAspectRatio="none">
+             <path d="M0,20 C300,80 600,-20 1000,40 C1200,70 1350,10 1440,30 L1440,100 L0,100 Z" fill="#0284c7"/>
+           </svg>
+        </div>
+
+        {/* 
+          ==================================================
+          BOAT & WAKE
+          ==================================================
+        */}
+        <motion.div 
+          className="absolute top-[55%] left-[55%] lg:left-[60%] z-20 flex flex-col items-center"
+          animate={{ 
+            y: [0, -6, 0], // Gentle bobbing
+            rotate: [-1, 1, -1], // Subtle rocking
+            x: [0, 20, 0] // extremely subtle drifting
+          }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
           
-          <div className="flex items-center gap-2 bg-white rounded-bl-3xl px-6 py-4 shadow-lg absolute top-0 right-0">
-            <SailorLogo className="w-6 h-6 text-indigo-500" />
-            <span className="font-heading font-extrabold text-lg tracking-widest text-indigo-900 ml-2">SAILOR</span>
+          {/* Boat SVG */}
+          <div className="relative w-20 h-20 md:w-28 md:h-28 z-20 drop-shadow-xl">
+             <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+               {/* Hull Bottom */}
+               <path d="M15 70L85 70L75 82L25 82L15 70Z" fill="#1e293b"/>
+               {/* Hull Top */}
+               <path d="M15 70L85 70L75 74L25 74L15 70Z" fill="#cbd5e1"/>
+               {/* Mast */}
+               <rect x="49" y="20" width="2" height="50" fill="#94a3b8"/>
+               {/* Back Sail */}
+               <path d="M48 25L48 68L20 68C20 68 35 45 48 25Z" fill="#f1f5f9"/>
+               {/* Front Sail */}
+               <path d="M52 28L52 65L75 65C75 65 65 45 52 28Z" fill="#ffffff"/>
+               {/* Flag */}
+               <path d="M51 20L65 15L51 10V20Z" fill="#f43f5e"/>
+             </svg>
+          </div>
+
+          {/* Water Wake System (Layered SVG Paths) */}
+          <div className="absolute top-[75%] left-[45%] -translate-x-1/2 w-[250px] h-[150px] -z-10 pointer-events-none">
+             
+             {/* Base Foam Blob (Stern) */}
+             <motion.div 
+               className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-6 bg-white/60 rounded-full blur-[2px]"
+               animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+             />
+
+             {/* V-Shaped Trailing Wake Lines */}
+             <svg className="absolute top-4 left-0 w-full h-full" viewBox="0 0 250 150">
+               {/* Left Trail */}
+               <motion.path 
+                 d="M125,0 C100,20 50,60 10,120"
+                 fill="none"
+                 stroke="#bae6fd"
+                 strokeWidth="4"
+                 strokeLinecap="round"
+                 animate={{ strokeDashoffset: [200, 0], opacity: [0.8, 0] }}
+                 transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                 strokeDasharray="20 30"
+               />
+               <motion.path 
+                 d="M125,0 C110,30 70,80 30,140"
+                 fill="none"
+                 stroke="#ffffff"
+                 strokeWidth="2"
+                 strokeLinecap="round"
+                 animate={{ strokeDashoffset: [200, 0], opacity: [0.6, 0] }}
+                 transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                 strokeDasharray="15 25"
+               />
+
+               {/* Right Trail */}
+               <motion.path 
+                 d="M125,0 C150,20 200,60 240,120"
+                 fill="none"
+                 stroke="#bae6fd"
+                 strokeWidth="4"
+                 strokeLinecap="round"
+                 animate={{ strokeDashoffset: [200, 0], opacity: [0.8, 0] }}
+                 transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                 strokeDasharray="20 30"
+               />
+               <motion.path 
+                 d="M125,0 C140,30 180,80 220,140"
+                 fill="none"
+                 stroke="#ffffff"
+                 strokeWidth="2"
+                 strokeLinecap="round"
+                 animate={{ strokeDashoffset: [200, 0], opacity: [0.6, 0] }}
+                 transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                 strokeDasharray="15 25"
+               />
+             </svg>
+
+             {/* Tiny Splashes/Foam Particles */}
+             <motion.div className="absolute top-4 left-[40%] w-2 h-2 bg-white rounded-full blur-[1px]" animate={{ x: [-5, -20], y: [0, 30], opacity: [1, 0], scale: [1, 0] }} transition={{ duration: 1.5, repeat: Infinity }} />
+             <motion.div className="absolute top-4 left-[60%] w-2 h-2 bg-white rounded-full blur-[1px]" animate={{ x: [5, 20], y: [0, 30], opacity: [1, 0], scale: [1, 0] }} transition={{ duration: 1.2, repeat: Infinity, delay: 0.3 }} />
+          </div>
+
+        </motion.div>
+
+        {/* 
+          ==================================================
+          FOREGROUND: ORGANIC WHITE SHAPE
+          ==================================================
+        */}
+        <div className="absolute bottom-[-2px] left-0 w-full h-[60%] z-30 pointer-events-none drop-shadow-[0_-10px_30px_rgba(0,0,0,0.1)]">
+          <svg viewBox="0 0 1440 600" className="w-full h-full" preserveAspectRatio="none">
+            {/* 
+              This creates a massive, sweeping organic paper-like cutout.
+              It starts high on the left, dips smoothly into the middle, and waves out to the right.
+            */}
+            <path 
+              d="M0,600 L0,50 C250,250 500,350 850,200 C1150,50 1350,150 1440,80 L1440,600 Z" 
+              fill="#FDFBF7" 
+            />
+          </svg>
+        </div>
+
+        {/* 
+          ==================================================
+          HERO CONTENT (TEXT INSIDE FOREGROUND)
+          ==================================================
+        */}
+        <div className="absolute bottom-0 left-0 w-full h-[55%] z-40 flex items-center px-6 md:px-16 lg:px-24">
+          <div className="max-w-xl text-left mt-10 md:mt-20">
+            <h1 className="font-heading text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight uppercase leading-[0.95] mb-6">
+              Go Offshore
+            </h1>
+            <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-slate-600 mb-10 leading-snug italic">
+              Sail anonymously.<br/>
+              Meet someone new.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-start gap-4">
+              <Link href="/onboarding">
+                <Button className="rounded-full bg-coral-500 text-white hover:bg-coral-600 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 font-extrabold px-12 py-4 text-sm md:text-base uppercase tracking-widest border-none">
+                  Set Sail
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Header / Navigation (Overlays the entire scene cleanly) */}
+        <nav className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-8 md:px-16">
+          <Link href="/" className="flex items-center gap-3">
+            <SailorLogo className="w-8 h-8 text-slate-800" />
+            <span className="font-heading font-extrabold tracking-widest text-slate-800 text-xl">SAILOR</span>
+          </Link>
+          
+          <div className="hidden lg:flex items-center gap-10 text-sm font-bold uppercase tracking-widest text-slate-700">
+            <Link href="/explore" className="hover:text-sky-600 transition-colors">Explore</Link>
+            <Link href="/islands" className="hover:text-sky-600 transition-colors">Islands</Link>
+            <Link href="/about" className="hover:text-sky-600 transition-colors">About</Link>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Link href="/login" className="hidden md:block text-slate-700 hover:text-sky-600 font-bold tracking-widest uppercase text-sm transition-colors">
+              Log In
+            </Link>
+            <Link href="/onboarding">
+              <Button className="rounded-full bg-slate-900 text-white hover:bg-sky-600 hover:-translate-y-0.5 hover:shadow-lg transition-all font-bold uppercase tracking-widest text-xs md:text-sm px-8 py-2.5 border-none">
+                Set Sail
+              </Button>
+            </Link>
           </div>
         </nav>
 
-        {/* Top Section Text */}
-        <div className="absolute top-[25%] lg:top-[30%] w-full text-center z-10 px-4">
-          <h1 className="font-heading text-5xl md:text-7xl font-extrabold text-white tracking-widest drop-shadow-lg uppercase">
-            Go Offshore
-          </h1>
-          <p className="font-serif text-3xl md:text-5xl text-white mt-2 drop-shadow-md italic opacity-90">
-            meet random people
-          </p>
-        </div>
-
-        {/* The Dynamic Trail leaving the boat and going into the white screen */}
-        <svg className="absolute top-[40%] left-0 w-full h-[60vh] z-20 pointer-events-none" viewBox="0 0 1440 600" preserveAspectRatio="none">
-          {/* Main Trail */}
-          <motion.path
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.8 }}
-            transition={{ duration: 2.5, ease: "easeOut" }}
-            d="M720,100 C900,200 1100,300 800,450 C600,550 500,500 400,600"
-            fill="none"
-            stroke="#ffffff"
-            strokeWidth="4"
-            strokeDasharray="15 15"
-            className="drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
-          />
-          {/* Secondary Wake Effect */}
-          <motion.path
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.5 }}
-            transition={{ duration: 2.5, delay: 0.2, ease: "easeOut" }}
-            d="M700,90 C880,190 1080,290 780,440 C580,540 480,490 380,590"
-            fill="none"
-            stroke="#93c5fd"
-            strokeWidth="2"
-            strokeDasharray="10 10"
-          />
-        </svg>
-
-        {/* The Sweeping White Curve (The Double Screen UI Mask) */}
-        <div className="absolute bottom-[-1px] left-0 w-full leading-none z-10">
-          <svg viewBox="0 0 1440 320" className="w-full h-[25vh] md:h-[35vh]" preserveAspectRatio="none">
-            <path fill="#ffffff" d="M0,0 C400,400 1100,350 1440,100 L1440,320 L0,320 Z"></path>
-          </svg>
-        </div>
       </div>
 
       {/* 
-        Bottom White Section 
+        ==================================================
+        FEATURES & FOOTER (Rest of the Shore)
+        ==================================================
       */}
-      <div className="relative bg-white w-full flex flex-col items-center justify-start pt-8 pb-12 px-6 z-20 -mt-8">
+      <div className="relative bg-[#FDFBF7] w-full flex flex-col items-center justify-start pt-10 pb-24 px-6 z-20">
         
-        <p className="max-w-2xl text-center text-slate-500 font-medium leading-relaxed mb-8 text-sm md:text-base">
-          The ocean is vast and full of mysteries. Onboard new connections anonymously. No profiles, no algorithms—just you, the sea, and the people you meet along the way.
-        </p>
-
-        <Link href="/onboarding">
-          <Button className="rounded-full bg-indigo-500 text-white hover:bg-indigo-600 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(99,102,241,0.3)] transition-all duration-300 font-bold px-12 py-3 text-sm uppercase tracking-widest border-none">
-            Set Sail
-          </Button>
-        </Link>
-
-        {/* Social Icons (Matching reference layout) */}
-        <div className="flex gap-4 mt-12 mb-6">
-          <div className="w-8 h-8 rounded bg-[#7E88F4] flex items-center justify-center text-white cursor-pointer hover:bg-indigo-600 transition-colors shadow-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        {/* Features Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl mx-auto relative z-40">
+          {/* Feature 1 */}
+          <div className="group rounded-[32px] p-10 bg-white border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_rgba(2,132,199,0.08)] transition-all duration-500 hover:-translate-y-2 text-left">
+            <div className="mb-8 w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-500 group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 6c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" /><path d="M2 12c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" /><path d="M2 18c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" /></svg>
+            </div>
+            <h3 className="font-heading font-extrabold text-2xl text-slate-800 mb-4 tracking-tight">Set Sail</h3>
+            <p className="text-slate-500 leading-relaxed font-medium">Leave the shore behind. Connect with someone entirely new through a single tap. No profiles, no algorithms.</p>
           </div>
-          <div className="w-8 h-8 rounded bg-[#7E88F4] flex items-center justify-center text-white cursor-pointer hover:bg-indigo-600 transition-colors shadow-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+          
+          {/* Feature 2 */}
+          <div className="group rounded-[32px] p-10 bg-white border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_rgba(244,63,94,0.08)] transition-all duration-500 hover:-translate-y-2 text-left">
+            <div className="mb-8 w-14 h-14 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-500 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-500">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22v-7l-2-2" /><path d="M12 15l2-2" /><path d="M17 8c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z" /><path d="M4 22h16" /><path d="M7 22v-4" /><path d="M17 22v-4" /></svg>
+            </div>
+            <h3 className="font-heading font-extrabold text-2xl text-slate-800 mb-4 tracking-tight">Explore Islands</h3>
+            <p className="text-slate-500 leading-relaxed font-medium">Join themed communities floating in the sea. Drop anchor at Music Island or find deep conversations at midnight.</p>
           </div>
-          <div className="w-8 h-8 rounded bg-[#7E88F4] flex items-center justify-center text-white cursor-pointer hover:bg-indigo-600 transition-colors shadow-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          
+          {/* Feature 3 */}
+          <div className="group rounded-[32px] p-10 bg-white border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_rgba(99,102,241,0.08)] transition-all duration-500 hover:-translate-y-2 text-left">
+            <div className="mb-8 w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-500 group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-500">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3" /><line x1="12" y1="22" x2="12" y2="8" /><path d="M5 12H2a10 10 0 0 0 20 0h-3" /></svg>
+            </div>
+            <h3 className="font-heading font-extrabold text-2xl text-slate-800 mb-4 tracking-tight">Build Your Crew</h3>
+            <p className="text-slate-500 leading-relaxed font-medium">Found someone you genuinely click with? Bring them aboard your ship so you never lose each other at sea.</p>
           </div>
         </div>
-
-        <p className="text-slate-400 text-sm font-medium flex items-center gap-1 mt-2">
-          designed by <span className="font-bold text-slate-700">Sailor</span>
-        </p>
-
       </div>
+
+      {/* Footer */}
+      <footer className="bg-[#FDFBF7] text-slate-500 py-16 px-6 relative z-20 border-t border-slate-200">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-3">
+            <SailorLogo className="w-8 h-8 text-slate-300" />
+            <span className="font-heading font-extrabold tracking-widest text-slate-400 text-lg mt-1">SAILOR</span>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <p className="text-sm font-medium">Â© 2026 Sailor. Nobody sails alone.</p>
+            <div className="hidden md:block w-px h-6 bg-slate-200"></div>
+            <div className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity cursor-default">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Presented by</span>
+              <DotLogo width={18} height={18} className="text-slate-700" />
+              <span className="font-heading font-extrabold text-base text-slate-700 tracking-tight">.dot</span>
+            </div>
+          </div>
+
+          <div className="flex gap-6 text-sm font-bold uppercase tracking-widest">
+            <a href="#" className="hover:text-slate-700 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
