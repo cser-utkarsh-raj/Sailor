@@ -11,44 +11,44 @@ export default function WaveBackground({ className = '', variant = 'subtle' }: W
   if (variant === 'hero') {
     return (
       <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
-        {/* Sky gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#E8F4FD] via-[#B8E0F7] to-[#7BB8E0]" />
+        {/* Sky gradient - Deep Navy to Ocean Midnight */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#0f172a] to-[#1e3a8a]" />
 
-        {/* Clouds */}
+        {/* Clouds - Ghostly blue */}
         <motion.div
-          className="absolute top-[10%] left-[10%] w-32 h-12 bg-white/60 rounded-full blur-sm"
+          className="absolute top-[10%] left-[10%] w-32 h-12 bg-indigo-200/5 rounded-full blur-xl"
           animate={{ x: [0, 30, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute top-[15%] right-[20%] w-40 h-14 bg-white/50 rounded-full blur-sm"
+          className="absolute top-[15%] right-[20%] w-40 h-14 bg-indigo-200/5 rounded-full blur-xl"
           animate={{ x: [0, -20, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute top-[8%] right-[40%] w-24 h-8 bg-white/40 rounded-full blur-sm"
+          className="absolute top-[8%] right-[40%] w-24 h-8 bg-indigo-200/5 rounded-full blur-xl"
           animate={{ x: [0, 15, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
         />
 
-        {/* Distant mountains/islands */}
+        {/* Distant mountains/islands - Dark silhouettes */}
         <div className="absolute bottom-[35%] left-0 right-0">
           <svg viewBox="0 0 1440 200" className="w-full" preserveAspectRatio="none">
             <path
               d="M0 200 L0 120 Q100 60 200 100 Q300 140 400 80 Q500 20 600 60 Q700 100 800 50 Q900 0 1000 40 Q1100 80 1200 30 Q1300 60 1440 80 L1440 200 Z"
-              fill="#8FBFDB"
-              opacity="0.3"
+              fill="#0f172a"
+              opacity="0.8"
             />
             <path
               d="M0 200 L0 140 Q150 100 300 130 Q450 160 600 110 Q750 60 900 90 Q1050 120 1200 80 Q1350 100 1440 120 L1440 200 Z"
-              fill="#7AADCC"
-              opacity="0.4"
+              fill="#0b1121"
+              opacity="0.9"
             />
           </svg>
         </div>
 
-        {/* Ocean water */}
-        <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-b from-[#4DA8D8] to-[#2B7DE9]">
+        {/* Ocean water - Deep ocean colors */}
+        <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-b from-[#1e3a8a] to-[#082f49]">
           {/* Wave layers */}
           <motion.svg
             viewBox="0 0 1440 100"
@@ -59,7 +59,7 @@ export default function WaveBackground({ className = '', variant = 'subtle' }: W
           >
             <path
               d="M0 40 Q90 20 180 40 Q270 60 360 40 Q450 20 540 40 Q630 60 720 40 Q810 20 900 40 Q990 60 1080 40 Q1170 20 1260 40 Q1350 60 1440 40 L1440 100 L0 100 Z"
-              fill="#4DA8D8"
+              fill="#1e3a8a"
             />
           </motion.svg>
           <motion.svg
@@ -71,17 +71,17 @@ export default function WaveBackground({ className = '', variant = 'subtle' }: W
           >
             <path
               d="M0 40 Q90 55 180 40 Q270 25 360 40 Q450 55 540 40 Q630 25 720 40 Q810 55 900 40 Q990 25 1080 40 Q1170 55 1260 40 Q1350 25 1440 40 L1440 100 L0 100 Z"
-              fill="#3E95CB"
-              opacity="0.7"
+              fill="#172554"
+              opacity="0.8"
             />
           </motion.svg>
 
-          {/* Water shimmer */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-4 left-[20%] w-20 h-1 bg-white/50 rounded-full" />
-            <div className="absolute top-12 left-[50%] w-16 h-1 bg-white/40 rounded-full" />
-            <div className="absolute top-8 left-[70%] w-12 h-1 bg-white/30 rounded-full" />
-            <div className="absolute top-20 left-[35%] w-14 h-1 bg-white/40 rounded-full" />
+          {/* Bioluminescent Water shimmer */}
+          <div className="absolute inset-0 opacity-40">
+            <div className="absolute top-4 left-[20%] w-20 h-1 bg-cyan-400/50 shadow-[0_0_10px_rgba(34,211,238,1)] rounded-full" />
+            <div className="absolute top-12 left-[50%] w-16 h-1 bg-teal-400/50 shadow-[0_0_10px_rgba(45,212,191,1)] rounded-full" />
+            <div className="absolute top-8 left-[70%] w-12 h-1 bg-cyan-400/50 shadow-[0_0_10px_rgba(34,211,238,1)] rounded-full" />
+            <div className="absolute top-20 left-[35%] w-14 h-1 bg-teal-400/50 shadow-[0_0_10px_rgba(45,212,191,1)] rounded-full" />
           </div>
         </div>
 

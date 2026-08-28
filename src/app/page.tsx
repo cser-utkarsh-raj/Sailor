@@ -10,61 +10,71 @@ import Card from "@/components/ui/Card";
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen bg-[#58c5d0] overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#070b19] overflow-x-hidden selection:bg-teal-400/30">
+      
+      {/* Deep Ocean Dreamy Pastel Ambient Glows */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-500/20 blur-[120px] mix-blend-screen" />
+        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-pink-500/15 blur-[120px] mix-blend-screen" />
+        <div className="absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] rounded-full bg-blue-600/20 blur-[150px] mix-blend-screen" />
+      </div>
+
       {/* Navigation */}
-      <nav className="absolute top-0 left-0 right-0 z-50 mx-auto flex max-w-6xl items-center justify-between px-5 py-5 md:px-8">
-        <Link href="/" className="flex items-center gap-2 text-white hover:opacity-80 transition-opacity">
-          <SailorLogo className="w-8 h-8 text-white" />
-          <span className="font-heading font-extrabold text-lg tracking-[0.2em] text-white">SAILOR</span>
+      <nav className="absolute top-4 left-4 right-4 z-50 mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl">
+        <Link href="/" className="flex items-center gap-3 text-white hover:opacity-80 transition-opacity">
+          <SailorLogo className="w-8 h-8 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
+          <span className="font-heading font-extrabold text-xl tracking-[0.25em] text-white">SAILOR</span>
         </Link>
-        <div className="flex items-center gap-1 sm:gap-3">
-          <a href="#features" className="hidden sm:inline-flex px-4 py-2 text-sm font-semibold text-white/85 transition-colors hover:text-white">Explore</a>
-          <Button variant="ghost" className="text-white hover:text-white/80 hover:bg-white/10 hidden sm:inline-flex">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <a href="#features" className="hidden sm:inline-flex px-4 py-2 text-sm font-semibold text-white/70 transition-all hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]">Explore</a>
+          <Button variant="ghost" className="text-white hover:text-white hover:bg-white/10 hidden sm:inline-flex rounded-xl font-medium tracking-wide">
             Log In
           </Button>
-          <Button variant="primary" className="rounded-md bg-coral-400 px-5 py-2.5 text-sm shadow-none hover:bg-coral-500">
+          <Button variant="primary" className="rounded-xl bg-gradient-to-r from-coral-400 to-pink-500 px-6 py-2.5 text-sm font-bold shadow-[0_0_20px_rgba(242,144,138,0.4)] hover:shadow-[0_0_30px_rgba(242,144,138,0.6)] border border-white/20 transition-all">
             Sign Up
           </Button>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative flex min-h-[720px] h-screen flex-col items-center justify-start overflow-hidden px-4 pt-[18vh] text-center">
-        <div className="absolute inset-0 z-0">
+      <section className="relative flex min-h-[750px] h-screen flex-col items-center justify-center overflow-hidden px-4 text-center z-10">
+        <div className="absolute inset-0 z-0 opacity-40">
           <WaveBackground variant="hero" />
         </div>
         
-        <div className="z-10 flex flex-col items-center max-w-4xl mx-auto">
+        <div className="z-10 flex flex-col items-center max-w-4xl mx-auto mt-12">
           <motion.h1 
-            initial={{ opacity: 0, y: 30 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl font-heading text-5xl font-extrabold tracking-[-0.04em] text-white drop-shadow-lg md:text-7xl lg:text-[clamp(4.5rem,9vw,8rem)]"
+            initial={{ opacity: 0, y: 40, scale: 0.95 }} 
+            animate={{ opacity: 1, y: 0, scale: 1 }} 
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-4xl font-heading text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/60 drop-shadow-[0_0_40px_rgba(255,255,255,0.3)] md:text-8xl lg:text-[clamp(5rem,10vw,9rem)] leading-[0.9]"
           >
             SAILOR
           </motion.h1>
           
           <motion.p 
-            initial={{ opacity: 0, y: 30 }} 
+            initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-5 max-w-2xl text-base font-medium text-white/90 drop-shadow-md md:text-xl"
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 max-w-xl text-lg font-light leading-relaxed text-white/80 md:text-2xl tracking-wide"
           >
-            Find a new perspective, a new story, or your next great connection.
+            The ocean is vast. <br className="hidden md:block" />
+            <span className="font-semibold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">Someone is waiting to meet you.</span>
           </motion.p>
           
           <motion.div 
-            initial={{ opacity: 0, y: 30 }} 
+            initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-8 flex flex-col items-center gap-3 sm:flex-row"
+            transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-12 flex flex-col items-center gap-4 sm:flex-row"
           >
             <Link href="/onboarding">
-              <Button size="lg" className="min-w-[180px] rounded-md border-none bg-coral-400 text-white shadow-none hover:bg-coral-500">
-                Set Sail
+              <Button size="lg" className="min-w-[200px] rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md text-white shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:bg-white/20 hover:scale-105 transition-all duration-300 font-bold text-lg tracking-wide group relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-400/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="relative z-10 flex items-center justify-center gap-2">Set Sail <span className="group-hover:translate-x-1 transition-transform">→</span></span>
               </Button>
             </Link>
-            <Button size="lg" className="min-w-[180px] border-none bg-navy-900 text-white font-bold hover:bg-navy-800 shadow-lg" onClick={() => {
+            <Button size="lg" className="min-w-[200px] border border-white/5 bg-transparent text-white/70 font-semibold hover:bg-white/5 hover:text-white shadow-none rounded-2xl transition-all duration-300" onClick={() => {
               document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
             }}>
               Explore the Sea
@@ -74,59 +84,62 @@ export default function LandingPage() {
           <motion.div 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-6 text-sm font-medium text-white/80 flex items-center gap-2"
+            transition={{ duration: 1, delay: 0.8 }}
+            className="mt-12 px-6 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-sm font-medium text-teal-200/90 flex items-center gap-3 shadow-[0_0_20px_rgba(45,212,191,0.15)]"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M2 12c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6"/></svg>
+            <div className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,1)]"></span>
+            </div>
             184 sailors are currently at sea
           </motion.div>
         </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="relative z-20 bg-gradient-to-b from-[#e0f7fa] via-[#fce4ec] to-white px-4 py-32 overflow-hidden">
-        {/* Pastel Floating Orbs */}
-        <div className="absolute top-10 left-10 w-[400px] h-[400px] bg-teal-200/50 rounded-full blur-[100px] mix-blend-multiply pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-pink-200/50 rounded-full blur-[100px] mix-blend-multiply pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-orange-100/60 rounded-full blur-[100px] mix-blend-multiply pointer-events-none" />
+      </section>      {/* Features Section */}
+      <section id="features" className="relative z-20 bg-[#070b19] px-4 py-32 overflow-hidden border-t border-white/5">
+        {/* Pastel Floating Orbs in Dark Env */}
+        <div className="absolute top-10 left-10 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-pink-500/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-indigo-500/10 rounded-full blur-[150px] mix-blend-screen pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <p className="mb-3 text-center text-xs font-bold uppercase tracking-[0.22em] text-coral-500">The Sailor way</p>
-          <h2 className="mb-20 text-center font-heading text-4xl font-extrabold text-navy-900 md:text-5xl">
+          <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.3em] text-teal-400 drop-shadow-[0_0_10px_rgba(45,212,191,0.5)]">The Sailor way</p>
+          <h2 className="mb-24 text-center font-heading text-4xl font-extrabold text-white md:text-5xl tracking-tight">
             Go a little deeper.
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="h-full"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+              className="h-full group"
             >
-              <div className="h-full rounded-3xl border border-white/40 bg-white/40 backdrop-blur-xl p-10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-2 hover:bg-white/60 transition-all">
-                <div className="mb-8 p-5 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-200 shadow-sm border border-white/50">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0284c7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="relative h-full rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-10 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative mb-8 p-6 rounded-2xl bg-white/5 shadow-inner border border-white/10 group-hover:scale-110 transition-transform duration-500 group-hover:border-cyan-400/30 group-hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">
                     <path d="M2 6c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" />
                     <path d="M2 12c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" />
                     <path d="M2 18c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" />
                   </svg>
                 </div>
-                <h3 className="font-heading font-extrabold text-2xl text-navy-900 mb-3">Set Sail</h3>
-                <p className="text-navy-700 font-medium leading-relaxed">Meet someone new with a single tap. No profiles to browse, no endless swiping.</p>
+                <h3 className="relative font-heading font-bold text-2xl text-white mb-4 tracking-wide">Set Sail</h3>
+                <p className="relative text-white/60 font-light leading-relaxed">Meet someone new with a single tap. No profiles to browse, no endless swiping.</p>
               </div>
             </motion.div>
             
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="h-full"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="h-full group"
             >
-              <div className="h-full rounded-3xl border border-white/40 bg-white/40 backdrop-blur-xl p-10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-2 hover:bg-white/60 transition-all">
-                <div className="mb-8 p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-200 shadow-sm border border-white/50">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0d9488" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="relative h-full rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-10 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative mb-8 p-6 rounded-2xl bg-white/5 shadow-inner border border-white/10 group-hover:scale-110 transition-transform duration-500 group-hover:border-teal-400/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.2)]">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-[0_0_10px_rgba(45,212,191,0.5)]">
                     <path d="M12 22v-7l-2-2" />
                     <path d="M12 15l2-2" />
                     <path d="M17 8c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z" />
@@ -135,33 +148,34 @@ export default function LandingPage() {
                     <path d="M17 22v-4" />
                   </svg>
                 </div>
-                <h3 className="font-heading font-extrabold text-2xl text-navy-900 mb-3">Explore Islands</h3>
-                <p className="text-navy-700 font-medium leading-relaxed">Join themed communities floating in the sea. From music lovers to night owls.</p>
+                <h3 className="relative font-heading font-bold text-2xl text-white mb-4 tracking-wide">Explore Islands</h3>
+                <p className="relative text-white/60 font-light leading-relaxed">Join themed communities floating in the sea. From music lovers to night owls.</p>
               </div>
             </motion.div>
             
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="h-full"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              className="h-full group"
             >
-              <div className="h-full rounded-3xl border border-white/40 bg-white/40 backdrop-blur-xl p-10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-2 hover:bg-white/60 transition-all">
-                <div className="mb-8 p-5 rounded-2xl bg-gradient-to-br from-orange-100 to-rose-200 shadow-sm border border-white/50">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e11d48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="relative h-full rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-10 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:border-white/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative mb-8 p-6 rounded-2xl bg-white/5 shadow-inner border border-white/10 group-hover:scale-110 transition-transform duration-500 group-hover:border-pink-400/30 group-hover:shadow-[0_0_30px_rgba(244,114,182,0.2)]">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f472b6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-[0_0_10px_rgba(244,114,182,0.5)]">
                     <circle cx="12" cy="5" r="3" />
                     <line x1="12" y1="22" x2="12" y2="8" />
                     <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
                   </svg>
                 </div>
-                <h3 className="font-heading font-extrabold text-2xl text-navy-900 mb-3">Build Your Crew</h3>
-                <p className="text-navy-700 font-medium leading-relaxed">Found someone you click with? Bring them aboard your ship to sail together.</p>
+                <h3 className="relative font-heading font-bold text-2xl text-white mb-4 tracking-wide">Build Your Crew</h3>
+                <p className="relative text-white/60 font-light leading-relaxed">Found someone you click with? Bring them aboard your ship to sail together.</p>
               </div>
             </motion.div>
           </div>
         </div>
-      </section>
+      </section>n>
 
       {/* Philosophy Section */}
       <section className="bg-ocean-50 py-20 px-4 relative z-20">
