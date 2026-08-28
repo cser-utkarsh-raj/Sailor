@@ -11,20 +11,48 @@ import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import { Input } from "@/components/ui/Input";
 
-const COUNTRIES = [
-  { name: "India", flag: "🇮🇳" },
-  { name: "USA", flag: "🇺🇸" },
-  { name: "UK", flag: "🇬🇧" },
-  { name: "Japan", flag: "🇯🇵" },
-  { name: "Brazil", flag: "🇧🇷" },
-  { name: "Germany", flag: "🇩🇪" },
-  { name: "France", flag: "🇫🇷" },
-  { name: "South Korea", flag: "🇰🇷" },
-  { name: "Canada", flag: "🇨🇦" },
-  { name: "Australia", flag: "🇦🇺" },
-  { name: "Mexico", flag: "🇲🇽" },
-  { name: "Nigeria", flag: "🇳🇬" },
-];
+const COUNTRY_FLAGS: Record<string, string> = {
+  "Afghanistan": "🇦🇫", "Albania": "🇦🇱", "Algeria": "🇩🇿", "Argentina": "🇦🇷", "Armenia": "🇦🇲",
+  "Australia": "🇦🇺", "Austria": "🇦🇹", "Azerbaijan": "🇦🇿", "Bangladesh": "🇧🇩", "Belgium": "🇧🇪",
+  "Bolivia": "🇧🇴", "Brazil": "🇧🇷", "Bulgaria": "🇧🇬", "Cambodia": "🇰🇭", "Cameroon": "🇨🇲",
+  "Canada": "🇨🇦", "Chile": "🇨🇱", "China": "🇨🇳", "Colombia": "🇨🇴", "Costa Rica": "🇨🇷",
+  "Croatia": "🇭🇷", "Cuba": "🇨🇺", "Czech Republic": "🇨🇿", "Denmark": "🇩🇰", "Dominican Republic": "🇩🇴",
+  "Ecuador": "🇪🇨", "Egypt": "🇪🇬", "El Salvador": "🇸🇻", "Ethiopia": "🇪🇹", "Finland": "🇫🇮",
+  "France": "🇫🇷", "Georgia": "🇬🇪", "Germany": "🇩🇪", "Ghana": "🇬🇭", "Greece": "🇬🇷",
+  "Guatemala": "🇬🇹", "Hungary": "🇭🇺", "Iceland": "🇮🇸", "India": "🇮🇳", "Indonesia": "🇮🇩",
+  "Iran": "🇮🇷", "Iraq": "🇮🇶", "Ireland": "🇮🇪", "Israel": "🇮🇱", "Italy": "🇮🇹",
+  "Jamaica": "🇯🇲", "Japan": "🇯🇵", "Jordan": "🇯🇴", "Kazakhstan": "🇰🇿", "Kenya": "🇰🇪",
+  "Kuwait": "🇰🇼", "Latvia": "🇱🇻", "Lebanon": "🇱🇧", "Lithuania": "🇱🇹", "Malaysia": "🇲🇾",
+  "Mexico": "🇲🇽", "Morocco": "🇲🇦", "Myanmar": "🇲🇲", "Nepal": "🇳🇵", "Netherlands": "🇳🇱",
+  "New Zealand": "🇳🇿", "Nigeria": "🇳🇬", "Norway": "🇳🇴", "Oman": "🇴🇲", "Pakistan": "🇵🇰",
+  "Panama": "🇵🇦", "Paraguay": "🇵🇾", "Peru": "🇵🇪", "Philippines": "🇵🇭", "Poland": "🇵🇱",
+  "Portugal": "🇵🇹", "Qatar": "🇶🇦", "Romania": "🇷🇴", "Russia": "🇷🇺", "Saudi Arabia": "🇸🇦",
+  "Serbia": "🇷🇸", "Singapore": "🇸🇬", "Slovakia": "🇸🇰", "Slovenia": "🇸🇮", "South Africa": "🇿🇦",
+  "South Korea": "🇰🇷", "Spain": "🇪🇸", "Sri Lanka": "🇱🇰", "Sudan": "🇸🇩", "Sweden": "🇸🇪",
+  "Switzerland": "🇨🇭", "Syria": "🇸🇾", "Taiwan": "🇹🇼", "Tanzania": "🇹🇿", "Thailand": "🇹🇭",
+  "Tunisia": "🇹🇳", "Turkey": "🇹🇷", "UAE": "🇦🇪", "UK": "🇬🇧", "Ukraine": "🇺🇦",
+  "Uruguay": "🇺🇾", "USA": "🇺🇸", "Uzbekistan": "🇺🇿", "Venezuela": "🇻🇪", "Vietnam": "🇻🇳",
+  "Yemen": "🇾🇪", "Zimbabwe": "🇿🇼",
+};
+
+function findCountryFlag(name: string): { name: string; flag: string } | null {
+  if (!name.trim()) return null;
+  const lower = name.trim().toLowerCase();
+  const exact = Object.entries(COUNTRY_FLAGS).find(([k]) => k.toLowerCase() === lower);
+  if (exact) return { name: exact[0], flag: exact[1] };
+  const partial = Object.entries(COUNTRY_FLAGS).find(([k]) => k.toLowerCase().startsWith(lower));
+  if (partial) return { name: partial[0], flag: partial[1] };
+  return { name: name.trim(), flag: "🏴‍☠️" };
+}
+
+function getCountrySuggestions(query: string): { name: string; flag: string }[] {
+  if (!query.trim()) return [];
+  const lower = query.trim().toLowerCase();
+  return Object.entries(COUNTRY_FLAGS)
+    .filter(([k]) => k.toLowerCase().includes(lower))
+    .slice(0, 6)
+    .map(([name, flag]) => ({ name, flag }));
+}
 
 const LANGUAGES = [
   "English", "Hindi", "Spanish", "French", "Japanese", "Korean",
@@ -66,6 +94,7 @@ export default function OnboardingPage() {
   const [name, setName] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [country, setCountry] = useState<{name: string, flag: string} | null>(null);
+  const [countrySearch, setCountrySearch] = useState("");
   const [languages, setLanguages] = useState<string[]>([]);
   const [interests, setInterests] = useState<string[]>([]);
 
@@ -218,22 +247,57 @@ export default function OnboardingPage() {
                 Where are you from?
               </h2>
               
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 w-full mb-6">
-                {COUNTRIES.map((c) => (
-                  <button
-                    key={c.name}
-                    onClick={() => setCountry(c)}
-                    className={`flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all ${
-                      country?.name === c.name 
-                        ? 'border-ocean-500 bg-ocean-50' 
-                        : 'border-slate-200 bg-white hover:border-ocean-200 hover:bg-ocean-50/50'
-                    }`}
-                  >
-                    <span className="text-3xl mb-2">{c.flag}</span>
-                    <span className="text-xs font-medium text-navy-700 text-center">{c.name}</span>
-                  </button>
-                ))}
+              <div className="w-full max-w-sm mb-4 relative">
+                <Input 
+                  placeholder="Type your country..." 
+                  value={countrySearch}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setCountrySearch(val);
+                    const found = findCountryFlag(val);
+                    if (found && found.flag !== "🏴‍☠️") {
+                      setCountry(found);
+                    } else {
+                      setCountry(null);
+                    }
+                  }}
+                  className="text-lg"
+                />
+                
+                {/* Live suggestions */}
+                {countrySearch.trim() && !country && (
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-ocean-100 rounded-xl shadow-lg overflow-hidden z-20">
+                    {getCountrySuggestions(countrySearch).map((c) => (
+                      <button
+                        key={c.name}
+                        onClick={() => {
+                          setCountry(c);
+                          setCountrySearch(c.name);
+                        }}
+                        className="w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-ocean-50 transition-colors border-b border-ocean-50 last:border-b-0"
+                      >
+                        <span className="text-2xl">{c.flag}</span>
+                        <span className="font-medium text-navy-800">{c.name}</span>
+                      </button>
+                    ))}
+                    {getCountrySuggestions(countrySearch).length === 0 && (
+                      <div className="px-4 py-3 text-navy-500 text-sm">No matches found — you&apos;ll sail as a pirate 🏴‍☠️</div>
+                    )}
+                  </div>
+                )}
               </div>
+
+              {/* Selected country display */}
+              {country && (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex items-center gap-3 bg-ocean-50 border border-ocean-200 rounded-2xl px-6 py-4 mb-6"
+                >
+                  <span className="text-4xl">{country.flag}</span>
+                  <span className="font-heading font-bold text-xl text-navy-900">{country.name}</span>
+                </motion.div>
+              )}
               
               <p className="text-navy-500 text-sm mb-8 text-center">Your exact location is never shared</p>
               

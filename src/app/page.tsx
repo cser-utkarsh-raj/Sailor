@@ -5,8 +5,8 @@ import Link from "next/link";
 import SailorLogo from "@/components/illustrations/SailorLogo";
 import DotLogo from "@/components/illustrations/DotLogo";
 import WaveBackground from "@/components/illustrations/WaveBackground";
-import { WavesIllustration, IslandIllustration, CrewIllustration } from "@/components/illustrations/LandingIllustrations";
 import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
 
 export default function LandingPage() {
   return (
@@ -64,7 +64,7 @@ export default function LandingPage() {
                 Set Sail
               </Button>
             </Link>
-            <Button size="lg" className="min-w-[180px] border-none bg-white text-navy-900 font-bold hover:bg-white/90 shadow-none" onClick={() => {
+            <Button size="lg" className="min-w-[180px] border-none bg-navy-900 text-white font-bold hover:bg-navy-800 shadow-lg" onClick={() => {
               document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
             }}>
               Explore the Sea
@@ -84,10 +84,15 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="relative z-20 bg-[#F5F8F7] px-4 py-28 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
+      <section id="features" className="relative z-20 bg-gradient-to-b from-[#e0f7fa] via-[#fce4ec] to-white px-4 py-32 overflow-hidden">
+        {/* Pastel Floating Orbs */}
+        <div className="absolute top-10 left-10 w-[400px] h-[400px] bg-teal-200/50 rounded-full blur-[100px] mix-blend-multiply pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-pink-200/50 rounded-full blur-[100px] mix-blend-multiply pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-orange-100/60 rounded-full blur-[100px] mix-blend-multiply pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <p className="mb-3 text-center text-xs font-bold uppercase tracking-[0.22em] text-coral-500">The Sailor way</p>
-          <h2 className="mb-20 text-center font-heading text-4xl font-extrabold text-navy-900 md:text-5xl tracking-tight">
+          <h2 className="mb-20 text-center font-heading text-4xl font-extrabold text-navy-900 md:text-5xl">
             Go a little deeper.
           </h2>
           
@@ -96,17 +101,19 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1, type: "spring", bounce: 0.4 }}
+              transition={{ delay: 0.1 }}
               className="h-full"
             >
-              <div className="h-full rounded-2xl border-[2.5px] border-navy-900 bg-white p-0 shadow-[5px_5px_0px_0px_#0F2B4A] hover:shadow-[8px_8px_0px_0px_#0F2B4A] hover:-translate-y-1 hover:-translate-x-0.5 transition-all overflow-hidden">
-                <div className="border-b-[2.5px] border-navy-900 overflow-hidden rounded-t-[calc(0.75rem-1px)]">
-                  <WavesIllustration className="w-full h-auto" />
+              <div className="h-full rounded-3xl border border-white/40 bg-white/40 backdrop-blur-xl p-10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-2 hover:bg-white/60 transition-all">
+                <div className="mb-8 p-5 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-200 shadow-sm border border-white/50">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0284c7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2 6c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" />
+                    <path d="M2 12c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" />
+                    <path d="M2 18c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" />
+                  </svg>
                 </div>
-                <div className="p-7">
-                  <h3 className="font-heading font-extrabold text-2xl text-navy-900 mb-3">Set Sail</h3>
-                  <p className="text-navy-600 leading-relaxed">Meet someone new with a single tap. No profiles to browse, no algorithms — just the open sea and a stranger waiting to be found.</p>
-                </div>
+                <h3 className="font-heading font-extrabold text-2xl text-navy-900 mb-3">Set Sail</h3>
+                <p className="text-navy-700 font-medium leading-relaxed">Meet someone new with a single tap. No profiles to browse, no endless swiping.</p>
               </div>
             </motion.div>
             
@@ -114,17 +121,22 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, type: "spring", bounce: 0.4 }}
+              transition={{ delay: 0.2 }}
               className="h-full"
             >
-              <div className="h-full rounded-2xl border-[2.5px] border-navy-900 bg-white p-0 shadow-[5px_5px_0px_0px_#22937B] hover:shadow-[8px_8px_0px_0px_#22937B] hover:-translate-y-1 hover:-translate-x-0.5 transition-all overflow-hidden">
-                <div className="border-b-[2.5px] border-navy-900 overflow-hidden rounded-t-[calc(0.75rem-1px)]">
-                  <IslandIllustration className="w-full h-auto" />
+              <div className="h-full rounded-3xl border border-white/40 bg-white/40 backdrop-blur-xl p-10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-2 hover:bg-white/60 transition-all">
+                <div className="mb-8 p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-200 shadow-sm border border-white/50">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0d9488" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22v-7l-2-2" />
+                    <path d="M12 15l2-2" />
+                    <path d="M17 8c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z" />
+                    <path d="M4 22h16" />
+                    <path d="M7 22v-4" />
+                    <path d="M17 22v-4" />
+                  </svg>
                 </div>
-                <div className="p-7">
-                  <h3 className="font-heading font-extrabold text-2xl text-navy-900 mb-3">Explore Islands</h3>
-                  <p className="text-navy-600 leading-relaxed">Join themed communities floating in the sea. Music lovers, night owls, deep thinkers — every island has its own vibe.</p>
-                </div>
+                <h3 className="font-heading font-extrabold text-2xl text-navy-900 mb-3">Explore Islands</h3>
+                <p className="text-navy-700 font-medium leading-relaxed">Join themed communities floating in the sea. From music lovers to night owls.</p>
               </div>
             </motion.div>
             
@@ -132,17 +144,19 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3, type: "spring", bounce: 0.4 }}
+              transition={{ delay: 0.3 }}
               className="h-full"
             >
-              <div className="h-full rounded-2xl border-[2.5px] border-navy-900 bg-white p-0 shadow-[5px_5px_0px_0px_#D44A30] hover:shadow-[8px_8px_0px_0px_#D44A30] hover:-translate-y-1 hover:-translate-x-0.5 transition-all overflow-hidden">
-                <div className="border-b-[2.5px] border-navy-900 overflow-hidden rounded-t-[calc(0.75rem-1px)]">
-                  <CrewIllustration className="w-full h-auto" />
+              <div className="h-full rounded-3xl border border-white/40 bg-white/40 backdrop-blur-xl p-10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] flex flex-col items-center text-center hover:-translate-y-2 hover:bg-white/60 transition-all">
+                <div className="mb-8 p-5 rounded-2xl bg-gradient-to-br from-orange-100 to-rose-200 shadow-sm border border-white/50">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e11d48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="5" r="3" />
+                    <line x1="12" y1="22" x2="12" y2="8" />
+                    <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+                  </svg>
                 </div>
-                <div className="p-7">
-                  <h3 className="font-heading font-extrabold text-2xl text-navy-900 mb-3">Build Your Crew</h3>
-                  <p className="text-navy-600 leading-relaxed">Found someone you click with? Bring them aboard. Your crew stays with you across every voyage — no more losing great connections.</p>
-                </div>
+                <h3 className="font-heading font-extrabold text-2xl text-navy-900 mb-3">Build Your Crew</h3>
+                <p className="text-navy-700 font-medium leading-relaxed">Found someone you click with? Bring them aboard your ship to sail together.</p>
               </div>
             </motion.div>
           </div>
@@ -150,26 +164,26 @@ export default function LandingPage() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="bg-white py-20 px-4 relative z-20 border-t-[2.5px] border-navy-900">
+      <section className="bg-ocean-50 py-20 px-4 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
           <p className="italic text-xl md:text-2xl text-navy-800 font-medium mb-12">
             &quot;We believe the best connections happen when you&apos;re not looking for them.&quot;
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <span className="flex items-center gap-2 bg-seafoam-50 px-5 py-2.5 rounded-full border-2 border-navy-900 shadow-[3px_3px_0px_0px_#22937B] font-bold text-sm text-navy-800">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d9488" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div className="flex flex-wrap justify-center gap-4 text-navy-700 font-semibold">
+            <span className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-ocean-100 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d9488" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
               Privacy First
             </span>
-            <span className="flex items-center gap-2 bg-ocean-50 px-5 py-2.5 rounded-full border-2 border-navy-900 shadow-[3px_3px_0px_0px_#1E5FB8] font-bold text-sm text-navy-800">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            <span className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-ocean-100 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
               Real Conversations
             </span>
-            <span className="flex items-center gap-2 bg-lavender-50 px-5 py-2.5 rounded-full border-2 border-navy-900 shadow-[3px_3px_0px_0px_#6B47BF] font-bold text-sm text-navy-800">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            <span className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-ocean-100 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
               Global Community
             </span>
-            <span className="flex items-center gap-2 bg-coral-50 px-5 py-2.5 rounded-full border-2 border-navy-900 shadow-[3px_3px_0px_0px_#D44A30] font-bold text-sm text-navy-800">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e11d48" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            <span className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-ocean-100 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
               Safe Space
             </span>
           </div>

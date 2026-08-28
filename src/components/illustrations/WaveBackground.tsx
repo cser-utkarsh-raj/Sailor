@@ -113,20 +113,96 @@ export default function WaveBackground({ className = '', variant = 'subtle' }: W
           </svg>
         </motion.div>
 
-        {/* Floating sea elements */}
+        {/* Sun */}
         <motion.div
-          className="absolute bottom-[28%] left-[60%] text-2xl"
-          animate={{ y: [0, -5, 0], x: [0, 3, 0] }}
+          className="absolute top-[6%] right-[12%]"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="18" fill="#FFE082" />
+            <circle cx="40" cy="40" r="24" fill="#FFE082" opacity="0.3" />
+            <circle cx="40" cy="40" r="32" fill="#FFE082" opacity="0.1" />
+          </svg>
+        </motion.div>
+
+        {/* Birds */}
+        <motion.svg
+          className="absolute top-[12%] left-[35%]"
+          width="60" height="20" viewBox="0 0 60 20"
+          animate={{ x: [0, 40, 80], y: [0, -5, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <path d="M5 10 Q10 4 15 10" stroke="#5C8FA8" strokeWidth="1.5" fill="none" />
+          <path d="M20 8 Q26 2 32 8" stroke="#5C8FA8" strokeWidth="1.5" fill="none" />
+          <path d="M38 12 Q42 7 46 12" stroke="#5C8FA8" strokeWidth="1.2" fill="none" opacity="0.6" />
+        </motion.svg>
+
+        {/* Lighthouse on distant island */}
+        <div className="absolute bottom-[36%] right-[8%] md:right-[12%]">
+          <svg width="40" height="70" viewBox="0 0 40 70" fill="none">
+            {/* Island base */}
+            <ellipse cx="20" cy="65" rx="20" ry="5" fill="#7AADCC" opacity="0.5" />
+            {/* Lighthouse body */}
+            <path d="M15 30 L17 65 L23 65 L25 30 Z" fill="#F5F5F5" stroke="#B0BEC5" strokeWidth="0.5" />
+            <rect x="16" y="40" width="8" height="3" fill="#EF5350" opacity="0.7" rx="0.5" />
+            <rect x="16" y="50" width="8" height="3" fill="#EF5350" opacity="0.7" rx="0.5" />
+            {/* Lighthouse top */}
+            <rect x="14" y="27" width="12" height="5" fill="#455A64" rx="1" />
+            <path d="M17 27 L20 20 L23 27 Z" fill="#EF5350" />
+            {/* Light glow */}
+            <motion.circle cx="20" cy="24" r="3" fill="#FFEB3B" opacity="0.6"
+              animate={{ opacity: [0.3, 0.8, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </svg>
+        </div>
+
+        {/* Tropical fish — detailed SVG */}
+        <motion.div
+          className="absolute bottom-[28%] left-[60%]"
+          animate={{ y: [0, -5, 0], x: [0, 8, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         >
-          🐠
+          <svg width="36" height="24" viewBox="0 0 36 24" fill="none">
+            <ellipse cx="16" cy="12" rx="12" ry="7" fill="#FF8A65" />
+            <path d="M28 12 L36 5 L36 19 Z" fill="#FF8A65" />
+            <ellipse cx="16" cy="12" rx="9" ry="5" fill="#FFAB91" />
+            <circle cx="10" cy="10" r="1.5" fill="#37474F" />
+            <circle cx="9.5" cy="9.5" r="0.5" fill="white" />
+            <path d="M5 12 Q8 14 11 12" stroke="#E64A19" strokeWidth="0.8" fill="none" />
+            <path d="M14 7 Q16 5 18 7" stroke="#E64A19" strokeWidth="0.6" fill="none" opacity="0.5" />
+            <path d="M14 17 Q16 19 18 17" stroke="#E64A19" strokeWidth="0.6" fill="none" opacity="0.5" />
+          </svg>
         </motion.div>
+
+        {/* Seashell — detailed SVG */}
         <motion.div
-          className="absolute bottom-[22%] left-[30%] text-lg opacity-60"
-          animate={{ y: [0, -4, 0] }}
+          className="absolute bottom-[22%] left-[30%] opacity-70"
+          animate={{ y: [0, -4, 0], rotate: [0, 5, -5, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
         >
-          🐚
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2 C6 2 2 8 2 14 C2 18 6 22 12 22 C18 22 22 18 22 14 C22 8 18 2 12 2 Z" fill="#FFCCBC" stroke="#FFAB91" strokeWidth="0.8" />
+            <path d="M12 4 Q8 10 12 20" stroke="#FF8A65" strokeWidth="0.6" fill="none" />
+            <path d="M12 4 Q16 10 12 20" stroke="#FF8A65" strokeWidth="0.6" fill="none" />
+            <path d="M6 10 Q12 8 18 10" stroke="#FF8A65" strokeWidth="0.5" fill="none" />
+            <path d="M4 14 Q12 12 20 14" stroke="#FF8A65" strokeWidth="0.5" fill="none" />
+          </svg>
+        </motion.div>
+
+        {/* Jellyfish */}
+        <motion.div
+          className="absolute bottom-[18%] right-[40%] opacity-50"
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        >
+          <svg width="20" height="30" viewBox="0 0 20 30" fill="none">
+            <path d="M2 12 Q2 2 10 2 Q18 2 18 12 Z" fill="#CE93D8" opacity="0.6" />
+            <path d="M5 12 Q6 20 4 28" stroke="#CE93D8" strokeWidth="1" fill="none" opacity="0.4" />
+            <path d="M10 12 Q10 22 9 28" stroke="#CE93D8" strokeWidth="1" fill="none" opacity="0.4" />
+            <path d="M15 12 Q14 18 16 28" stroke="#CE93D8" strokeWidth="1" fill="none" opacity="0.4" />
+          </svg>
         </motion.div>
       </div>
     );
