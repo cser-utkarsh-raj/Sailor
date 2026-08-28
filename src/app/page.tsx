@@ -71,14 +71,15 @@ export default function LandingPage() {
             </Button>
           </motion.div>
           
-          <motion.p 
+          <motion.div 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-6 text-sm font-medium text-white/80"
+            className="mt-6 text-sm font-medium text-white/80 flex items-center gap-2"
           >
-            🌊 184 sailors are currently at sea
-          </motion.p>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M2 12c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6"/></svg>
+            184 sailors are currently at sea
+          </motion.div>
         </div>
       </section>
 
@@ -166,16 +167,25 @@ export default function LandingPage() {
       <section className="bg-ocean-50 py-20 px-4 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
           <p className="italic text-xl md:text-2xl text-navy-800 font-medium mb-12">
-            "We believe the best connections happen when you're not looking for them."
+            &quot;We believe the best connections happen when you&apos;re not looking for them.&quot;
           </p>
-          <div className="flex flex-wrap justify-center gap-6 text-navy-700 font-medium">
-            <span className="flex items-center gap-2">🔒 Privacy First</span>
-            <span className="hidden sm:inline">·</span>
-            <span className="flex items-center gap-2">💬 Real Conversations</span>
-            <span className="hidden sm:inline">·</span>
-            <span className="flex items-center gap-2">🌍 Global Community</span>
-            <span className="hidden sm:inline">·</span>
-            <span className="flex items-center gap-2">🛡️ Safe Space</span>
+          <div className="flex flex-wrap justify-center gap-4 text-navy-700 font-semibold">
+            <span className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-ocean-100 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d9488" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Privacy First
+            </span>
+            <span className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-ocean-100 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+              Real Conversations
+            </span>
+            <span className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-ocean-100 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              Global Community
+            </span>
+            <span className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-ocean-100 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+              Safe Space
+            </span>
           </div>
         </div>
       </section>

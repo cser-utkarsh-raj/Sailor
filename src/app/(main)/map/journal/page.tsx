@@ -4,8 +4,12 @@ import { useSailor } from '@/lib/store/sailor-context';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import { motion } from 'motion/react';
-import { Award, Lock, Calendar, MapPin, Users, Navigation, TreePalm, Anchor } from 'lucide-react';
+import { Award, Lock, Calendar, MapPin, Users, Navigation, TreePalm, Anchor, Compass, Waves, Mail, Globe, Moon } from 'lucide-react';
 import { Achievement } from '@/types';
+
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  Compass, Anchor, Waves, Mail, Globe, Navigation, TreePalm, Moon,
+};
 
 export default function JournalPage() {
   const { voyageHistory, crew, achievements } = useSailor();
@@ -147,8 +151,11 @@ export default function JournalPage() {
                 transition={{ delay: i * 0.05 }}
               >
                 <Card className={`p-4 h-full flex flex-col items-center text-center ${!isUnlocked ? 'bg-navy-50 opacity-60 grayscale' : 'bg-white shadow-sm hover:shadow-md'}`}>
-                  <div className="text-4xl mb-3 relative">
-                    {achievement.emoji}
+                  <div className="mb-3 relative w-12 h-12 rounded-xl flex items-center justify-center bg-ocean-50">
+                    {(() => {
+                      const IconComp = (achievement as any).icon ? iconMap[(achievement as any).icon] : null;
+                      return IconComp ? <IconComp size={24} className="text-ocean-500" /> : <span className="text-2xl">{achievement.emoji}</span>;
+                    })()}
                     {!isUnlocked && (
                       <div className="absolute -bottom-1 -right-1 bg-navy-100 rounded-full p-1">
                         <Lock className="w-3 h-3 text-navy-600" />

@@ -22,10 +22,10 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     <div className="min-h-screen chart-grid">
       {/* Desktop Navigation */}
       <header className="hidden md:flex fixed top-0 left-0 right-0 h-[72px] bg-[#f5f8f7]/90 backdrop-blur-md border-b border-navy-200/60 z-50 items-center justify-between px-8">
-        <div className="flex items-center gap-2.5">
+        <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
           <SailorLogo size={36} />
           <span className="font-heading font-extrabold text-[17px] tracking-[0.22em] text-navy-900">SAILOR</span>
-        </div>
+        </Link>
         
         <nav className="flex items-center gap-1 rounded-full border border-navy-200/70 bg-white/60 p-1">
           {navItems.map((item) => {
