@@ -167,12 +167,13 @@ export default function LandingPage() {
           HERO CONTENT (TEXT INSIDE FOREGROUND)
           ==================================================
         */}
-        <div className="absolute bottom-0 left-0 w-full h-[55%] z-40 flex items-center px-6 md:px-16 lg:px-24">
-          <div className="max-w-xl text-left mt-10 md:mt-20">
-            <h1 className="font-heading text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight uppercase leading-[0.95] mb-6">
+        {/* Adjusted to pin firmly to the bottom so it doesn't overlap the blue ocean */}
+        <div className="absolute bottom-6 md:bottom-12 lg:bottom-16 left-0 w-full z-40 px-6 md:px-16 lg:px-24 pointer-events-none">
+          <div className="max-w-xl text-left pointer-events-auto">
+            <h1 className="font-heading text-6xl md:text-7xl lg:text-[6rem] font-extrabold text-slate-800 tracking-tight uppercase leading-[0.95] mb-4 md:mb-6">
               Go Offshore
             </h1>
-            <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-slate-600 mb-10 leading-snug italic">
+            <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-slate-600 mb-8 md:mb-10 leading-snug italic">
               Sail anonymously.<br/>
               Meet someone new.
             </p>
@@ -201,12 +202,10 @@ export default function LandingPage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link href="/login" className="hidden md:block text-slate-700 hover:text-sky-600 font-bold tracking-widest uppercase text-sm transition-colors">
-              Log In
-            </Link>
+            {/* Swapped "Log In / Sign Up" for an anonymous-first approach */}
             <Link href="/onboarding">
               <Button className="rounded-full bg-slate-900 text-white hover:bg-sky-600 hover:-translate-y-0.5 hover:shadow-lg transition-all font-bold uppercase tracking-widest text-xs md:text-sm px-8 py-2.5 border-none">
-                Set Sail
+                Start Sailing
               </Button>
             </Link>
           </div>
@@ -221,30 +220,58 @@ export default function LandingPage() {
       */}
       <div className="relative bg-[#FDFBF7] w-full flex flex-col items-center justify-start pt-10 pb-24 px-6 z-20">
         
-        {/* Features Section */}
+        {/* Features Section - Now using matching vector graphics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl mx-auto relative z-40">
-          {/* Feature 1 */}
+          
+          {/* Feature 1: Set Sail */}
           <div className="group rounded-[32px] p-10 bg-white border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_rgba(2,132,199,0.08)] transition-all duration-500 hover:-translate-y-2 text-left">
-            <div className="mb-8 w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-500 group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 6c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" /><path d="M2 12c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" /><path d="M2 18c.6 0 1.2-.2 1.8-.6.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6s1.2-.2 1.8-.6c.6-.4 1.2-.6 1.8-.6s1.2.2 1.8.6c.6.4 1.2.6 1.8.6" /></svg>
+            <div className="mb-8 w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+              {/* Custom Vector Icon matching hero */}
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-md">
+                <circle cx="50" cy="50" r="50" fill="#e0f2fe" />
+                <path d="M0 65 C 30 75 70 55 100 65 L 100 100 L 0 100 Z" fill="#38bdf8" />
+                {/* Mini Boat */}
+                <path d="M35 60L65 60L60 65L40 65Z" fill="#1e293b"/>
+                <rect x="49" y="35" width="2" height="25" fill="#94a3b8"/>
+                <path d="M52 38L52 58L65 58Z" fill="#ffffff"/>
+                <path d="M48 35L48 58L35 58Z" fill="#f1f5f9"/>
+              </svg>
             </div>
             <h3 className="font-heading font-extrabold text-2xl text-slate-800 mb-4 tracking-tight">Set Sail</h3>
             <p className="text-slate-500 leading-relaxed font-medium">Leave the shore behind. Connect with someone entirely new through a single tap. No profiles, no algorithms.</p>
           </div>
           
-          {/* Feature 2 */}
+          {/* Feature 2: Explore Islands */}
           <div className="group rounded-[32px] p-10 bg-white border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_rgba(244,63,94,0.08)] transition-all duration-500 hover:-translate-y-2 text-left">
-            <div className="mb-8 w-14 h-14 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-500 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-500">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22v-7l-2-2" /><path d="M12 15l2-2" /><path d="M17 8c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z" /><path d="M4 22h16" /><path d="M7 22v-4" /><path d="M17 22v-4" /></svg>
+            <div className="mb-8 w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+               {/* Custom Vector Icon matching hero */}
+               <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-md">
+                <circle cx="50" cy="50" r="50" fill="#e0f2fe" />
+                <path d="M0 65 C 30 75 70 55 100 65 L 100 100 L 0 100 Z" fill="#38bdf8" />
+                {/* Mini Island & Tree */}
+                <path d="M30 62 C 40 50 60 50 70 62 Z" fill="#fde047" />
+                <path d="M50 55 Q 55 40 65 30" fill="none" stroke="#64748b" strokeWidth="3" strokeLinecap="round" />
+                <path d="M65 30 Q 55 35 50 40" fill="none" stroke="#4ade80" strokeWidth="4" strokeLinecap="round" />
+                <path d="M65 30 Q 75 35 80 40" fill="none" stroke="#4ade80" strokeWidth="4" strokeLinecap="round" />
+                <path d="M65 30 Q 65 20 70 15" fill="none" stroke="#4ade80" strokeWidth="4" strokeLinecap="round" />
+              </svg>
             </div>
             <h3 className="font-heading font-extrabold text-2xl text-slate-800 mb-4 tracking-tight">Explore Islands</h3>
             <p className="text-slate-500 leading-relaxed font-medium">Join themed communities floating in the sea. Drop anchor at Music Island or find deep conversations at midnight.</p>
           </div>
           
-          {/* Feature 3 */}
+          {/* Feature 3: Build Your Crew */}
           <div className="group rounded-[32px] p-10 bg-white border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_rgba(99,102,241,0.08)] transition-all duration-500 hover:-translate-y-2 text-left">
-            <div className="mb-8 w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-500 group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-500">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3" /><line x1="12" y1="22" x2="12" y2="8" /><path d="M5 12H2a10 10 0 0 0 20 0h-3" /></svg>
+            <div className="mb-8 w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+               {/* Custom Vector Icon matching hero */}
+               <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-md">
+                <circle cx="50" cy="50" r="50" fill="#e0f2fe" />
+                {/* Two overlapping crew members */}
+                <circle cx="40" cy="45" r="12" fill="#7dd3fc" />
+                <path d="M20 85 C 20 65 60 65 60 85" fill="#38bdf8" />
+                <circle cx="65" cy="55" r="10" fill="#bae6fd" />
+                <path d="M45 85 C 45 70 85 70 85 85" fill="#7dd3fc" />
+              </svg>
             </div>
             <h3 className="font-heading font-extrabold text-2xl text-slate-800 mb-4 tracking-tight">Build Your Crew</h3>
             <p className="text-slate-500 leading-relaxed font-medium">Found someone you genuinely click with? Bring them aboard your ship so you never lose each other at sea.</p>
@@ -272,7 +299,7 @@ export default function LandingPage() {
 
           <div className="flex gap-6 text-sm font-bold uppercase tracking-widest">
             <a href="#" className="hover:text-slate-700 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a href="#" className="hover:text-slate-700 transition-colors">Terms</a>
           </div>
         </div>
       </footer>
