@@ -175,7 +175,7 @@ export default function LandingPage() {
             </motion.div>
           </div>
         </div>
-      </section>n>
+      </section>
 
       {/* Philosophy Section */}
       <section className="bg-ocean-50 py-20 px-4 relative z-20">
