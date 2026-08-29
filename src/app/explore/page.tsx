@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "motion/react";
 import Link from "next/link";
@@ -20,6 +20,81 @@ export default function LandingPage() {
   return (
     <div className="relative min-h-screen bg-[#FDFBF7] overflow-x-hidden font-sans">
       
+      {/* 
+        ==================================================
+        HERO SCENE: HD LUXURY IMAGE
+        ==================================================
+      */}
+      <div className="relative w-full h-[85vh] lg:h-[100vh] bg-[#FDFBF7] overflow-hidden">
+        
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/coastal_ship_hero.jpg')" }}
+        >
+          {/* Elegant dark gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-[#FDFBF7]"></div>
+        </div>
+
+        {/* 
+          ==================================================
+          HERO CONTENT (LUXURY TYPOGRAPHY)
+          ==================================================
+        */}
+        <div className="absolute bottom-[10%] left-0 w-full z-40 flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-12 md:pb-20">
+          <div className="max-w-4xl text-left">
+            <p className="font-sans font-medium tracking-[0.4em] uppercase text-xs md:text-sm text-white/90 mb-6 drop-shadow-md">
+              Discover a vast network of anonymous sailors
+            </p>
+            <h1 className="font-serif text-6xl md:text-8xl lg:text-[8rem] font-medium text-white tracking-tight leading-[0.95] mb-10 drop-shadow-xl">
+              Explore <br/><span className="italic font-light">The Ocean.</span>
+            </h1>
+            
+            <div className="flex flex-col sm:flex-row items-start gap-6 mt-8">
+              <Link href="/onboarding">
+                <Button className="rounded-full bg-white text-slate-900 hover:bg-slate-100 transition-all duration-300 font-sans font-bold px-12 py-5 text-xs uppercase tracking-[0.2em] border-none shadow-xl hover:-translate-y-1">
+                  Start Sailing
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Header / Navigation (Overlays the entire scene cleanly) */}
+        <nav className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-8 md:px-16">
+          <Link href="/" className="flex items-center gap-3">
+            <SailorLogo className="w-8 h-8 text-white drop-shadow-md" />
+            <span className="font-sans font-bold tracking-[0.3em] text-white text-lg uppercase drop-shadow-md">SAILOR</span>
+          </Link>
+          
+          <div className="hidden lg:flex items-center gap-12 text-xs font-bold uppercase tracking-[0.2em] text-white/90 drop-shadow-md">
+            <Link href="/explore" className="hover:text-white transition-colors">Explore</Link>
+            <Link href="/islands" className="hover:text-white transition-colors">Islands</Link>
+            <Link href="/about" className="hover:text-white transition-colors">About</Link>
+          </div>
+
+          <div className="flex items-center gap-6">
+            {deferredPrompt && (
+              <button 
+                onClick={() => {
+                  deferredPrompt.prompt();
+                  deferredPrompt.userChoice.then((choiceResult: any) => {
+                    if (choiceResult.outcome === 'accepted') setDeferredPrompt(null);
+                  });
+                }}
+                className="hidden md:flex items-center gap-2 text-white/90 hover:text-white font-bold tracking-[0.2em] uppercase text-xs transition-colors drop-shadow-md"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Install App
+              </button>
+            )}
+            <Link href="/login" className="hidden md:block text-white/90 hover:text-white font-bold tracking-[0.2em] uppercase text-xs transition-colors drop-shadow-md">
+              Log In
+            </Link>
+          </div>
+        </nav>
+      </div>
+
       {/* 
         ==================================================
         HERO SCENE: VECTOR ILLUSTRATED LANDSCAPE
@@ -181,10 +256,10 @@ export default function LandingPage() {
         <div className="absolute bottom-6 md:bottom-12 lg:bottom-16 left-0 w-full z-40 px-6 md:px-16 lg:px-24 pointer-events-none">
           <div className="max-w-xl text-left pointer-events-auto">
             <h1 className="font-heading text-6xl md:text-7xl lg:text-[6rem] font-extrabold text-slate-800 tracking-tight uppercase leading-[0.95] mb-4 md:mb-6">
-              Explore The Ocean
+              Go Offshore
             </h1>
             <p className="font-sans font-medium tracking-[0.2em] uppercase text-sm md:text-base text-slate-500 mb-8 md:mb-10">
-              Discover a vast network of anonymous sailors and hidden communities.
+              Go offshore, meet your people.
             </p>
             
             <div className="flex flex-col sm:flex-row items-start gap-4">
