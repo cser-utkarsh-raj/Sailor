@@ -6,8 +6,10 @@ import SailorLogo from "@/components/illustrations/SailorLogo";
 import DotLogo from "@/components/illustrations/DotLogo";
 import Button from "@/components/ui/Button";
 import { useState, useEffect } from "react";
+import { useSailor } from "@/lib/store/sailor-context";
 
 export default function LandingPage() {
+  const { isOnboarded } = useSailor();
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function LandingPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            {deferredPrompt && (
+            {deferredPrompt ? (
               <button
                 onClick={() => {
                   deferredPrompt.prompt();
@@ -48,17 +50,18 @@ export default function LandingPage() {
                     if (choiceResult.outcome === 'accepted') setDeferredPrompt(null);
                   });
                 }}
-                className="hidden md:flex items-center gap-1.5 text-slate-500 hover:text-slate-800 font-semibold tracking-[0.1em] uppercase text-[11px] transition-colors"
+                className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors flex items-center gap-2 shadow-sm hover:shadow-md hover:-translate-y-0.5"
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Install
+                Download App
               </button>
+            ) : (
+              <Link href={isOnboarded ? "/sea" : "/onboarding"}>
+                <button className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                  Set Sail
+                </button>
+              </Link>
             )}
-            <Link href="/onboarding">
-              <button className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors">
-                Set Sail
-              </button>
-            </Link>
           </div>
         </div>
       </nav>
@@ -69,13 +72,7 @@ export default function LandingPage() {
       <section className="relative w-full min-h-screen flex items-end lg:items-center overflow-hidden">
 
         {/* ---- ILLUSTRATED SCENE (Right side) ---- */}
-        <div className="absolute inset-0 z-0 bg-[#FDFBF7]">
-          {/* Subtle 5% watermark of the full image behind the text on the left */}
-          <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center opacity-[0.05]"
-            style={{ backgroundImage: "url('/coastal_ship_hero.jpg')" }}
-          />
-
+        <div className="absolute inset-0 z-0">
           {/* SVG clipPath — organic irregular mask, pushed right so text has clean white space */}
           <svg className="absolute" width="0" height="0">
             <defs>
@@ -107,21 +104,20 @@ export default function LandingPage() {
           />
         </div>
 
-        {/* ---- HERO TEXT (Left side, clean space) ---- */}
+        {/* ---- HERO TEXT (Left side, clean white space) ---- */}
         <div className="relative z-20 w-full px-6 md:px-12 lg:px-20 pt-36 pb-24 lg:pt-0 lg:pb-0">
           <div className="max-w-md lg:max-w-lg">
-            <p className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 mb-5">
-              Chat anonymously
+            <p className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 mb-5">
+              Sail anonymously
             </p>
-            <h1 className="font-heading text-[3.2rem] md:text-[4.5rem] lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.92] uppercase mb-6 drop-shadow-sm">
-              Go<br />Offshore
+            <h1 className="font-heading text-[3.2rem] md:text-[4.5rem] lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.92] uppercase mb-6">
+              Go<br />Offshore.
             </h1>
-            <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-sm mb-10 font-medium">
-              <span className="font-bold text-slate-800 block mb-1">Meet your people.</span>
-              Connect with real people online and chat completely anonymously.
+            <p className="text-slate-500 text-base md:text-lg leading-relaxed max-w-sm mb-10 font-medium">
+              Meet someone you&apos;ve never met.
             </p>
             <div className="flex items-center gap-4">
-              <Link href="/onboarding">
+              <Link href={isOnboarded ? "/sea" : "/onboarding"}>
                 <Button className="rounded-full bg-coral-500 text-white hover:bg-coral-600 font-bold px-10 py-3.5 text-xs uppercase tracking-[0.2em] border-none shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
                   Set Sail
                 </Button>
@@ -269,7 +265,7 @@ export default function LandingPage() {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Link href="/onboarding">
+            <Link href={isOnboarded ? "/sea" : "/onboarding"}>
               <Button className="rounded-full bg-slate-900 text-white hover:bg-slate-800 font-bold px-10 py-3.5 text-xs uppercase tracking-[0.2em] border-none shadow-lg hover:-translate-y-0.5 transition-all">
                 Start Sailing
               </Button>

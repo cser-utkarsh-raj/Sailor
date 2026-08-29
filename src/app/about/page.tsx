@@ -3,9 +3,22 @@
 import Link from "next/link";
 import SailorLogo from "@/components/illustrations/SailorLogo";
 import DotLogo from "@/components/illustrations/DotLogo";
+import Button from "@/components/ui/Button";
 import { useState, useEffect } from "react";
+import { useSailor } from "@/lib/store/sailor-context";
 
 export default function AboutPage() {
+  const { isOnboarded } = useSailor();
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
   return (
     <div className="relative min-h-screen bg-[#FDFBF7] overflow-x-hidden font-sans">
 
@@ -22,16 +35,39 @@ export default function AboutPage() {
             <Link href="/about" className="text-slate-800">About</Link>
             <Link href="/login" className="hover:text-slate-800 transition-colors">Log In</Link>
           </div>
-          <Link href="/onboarding">
-            <button className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors">
-              Set Sail
-            </button>
-          </Link>
+          <div className="flex items-center gap-3">
+            {deferredPrompt ? (
+              <button
+                onClick={() => {
+                  deferredPrompt.prompt();
+                  deferredPrompt.userChoice.then((choiceResult: any) => {
+                    if (choiceResult.outcome === 'accepted') setDeferredPrompt(null);
+                  });
+                }}
+                className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors flex items-center gap-2 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download App
+              </button>
+            ) : (
+              <Link href={isOnboarded ? "/sea" : "/onboarding"}>
+                <button className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                  Set Sail
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <header className="px-6 py-20 md:py-28 md:px-12 lg:px-20 max-w-5xl">
+      <header className="relative px-6 py-20 md:py-28 md:px-12 lg:px-20 max-w-5xl overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[400px] opacity-[0.04] pointer-events-none">
+          <svg viewBox="0 0 500 400" fill="none" className="w-full h-full">
+            <path d="M0,200 C100,280 200,120 300,220 C400,320 450,180 500,250" stroke="#0284c7" strokeWidth="2" fill="none"/>
+            <circle cx="350" cy="180" r="100" stroke="#0284c7" strokeWidth="0.5"/>
+          </svg>
+        </div>
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400 mb-5">The Vision</p>
         <h1 className="font-heading text-[3rem] md:text-[4.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.92] uppercase mb-6">
           Nobody Sails<br />Alone.
@@ -41,9 +77,24 @@ export default function AboutPage() {
         </p>
       </header>
 
+      {/* Wave transition */}
+      <div className="relative w-full h-16">
+        <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full" preserveAspectRatio="none">
+          <path d="M0,30 C200,60 400,0 600,40 C800,70 1000,10 1200,45 C1350,60 1400,30 1440,35 L1440,60 L0,60 Z" fill="#e0f2fe" opacity="0.4"/>
+          <path d="M0,40 C300,10 500,50 800,25 C1000,10 1200,45 1440,20 L1440,60 L0,60 Z" fill="#bae6fd" opacity="0.2"/>
+        </svg>
+      </div>
+
       {/* The Journey */}
-      <section className="px-6 md:px-12 lg:px-20 pb-24">
-        <div className="max-w-5xl">
+      <section className="relative px-6 md:px-12 lg:px-20 py-20 overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] opacity-[0.03] pointer-events-none">
+          <svg viewBox="0 0 400 400" fill="none" className="w-full h-full">
+            <circle cx="200" cy="200" r="180" stroke="#0284c7" strokeWidth="1"/>
+            <circle cx="200" cy="200" r="130" stroke="#0284c7" strokeWidth="0.5"/>
+          </svg>
+        </div>
+
+        <div className="max-w-5xl relative z-10">
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400 mb-6">How it works</p>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
@@ -73,6 +124,28 @@ export default function AboutPage() {
               <p className="text-slate-500 text-xs leading-relaxed">Click with someone? Bring them aboard to keep in touch forever.</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Ocean band CTA */}
+      <section className="relative w-full py-20 lg:py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#e0f2fe] via-[#bae6fd] to-[#7dd3fc] z-0" />
+        <svg className="absolute top-0 left-0 w-full h-10" viewBox="0 0 1440 40" preserveAspectRatio="none">
+          <path d="M0,40 C300,10 600,35 900,15 C1100,5 1300,30 1440,10 L1440,0 L0,0 Z" fill="#FDFBF7"/>
+        </svg>
+        <svg className="absolute bottom-0 left-0 w-full h-10" viewBox="0 0 1440 40" preserveAspectRatio="none">
+          <path d="M0,0 C200,30 500,5 800,25 C1000,35 1300,10 1440,20 L1440,40 L0,40 Z" fill="#FDFBF7"/>
+        </svg>
+
+        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+          <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-800 tracking-tight uppercase leading-tight mb-6">
+            The ocean is waiting.
+          </h2>
+          <Link href={isOnboarded ? "/sea" : "/onboarding"}>
+            <Button className="rounded-full bg-slate-900 text-white hover:bg-slate-800 font-bold px-10 py-3.5 text-xs uppercase tracking-[0.2em] border-none shadow-lg hover:-translate-y-0.5 transition-all">
+              Start Sailing
+            </Button>
+          </Link>
         </div>
       </section>
 
