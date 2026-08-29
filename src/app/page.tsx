@@ -74,15 +74,14 @@ export default function LandingPage() {
       {/* ==========================================
           THE SHORE — SINGLE HERO
           ========================================== */}
-      <section className="relative w-full min-h-screen flex items-end lg:items-center overflow-hidden">
+      <section className="relative w-full min-h-[100dvh] lg:min-h-screen flex items-end lg:items-center overflow-hidden">
 
-        {/* ---- ILLUSTRATED SCENE (Right side) ---- */}
+        {/* ---- ILLUSTRATED SCENE (Background) ---- */}
         <div className="absolute inset-0 z-0">
-          {/* SVG clipPath — organic irregular mask, pushed right so text has clean white space */}
-          <svg className="absolute" width="0" height="0">
+          <svg className="absolute w-0 h-0">
             <defs>
-              <clipPath id="shore-mask" clipPathUnits="objectBoundingBox">
-                {/* Starts at x=0.48 top — keeps left ~48% as pure white space */}
+              {/* DESKTOP MASK: Organic split, keeps left side pure white */}
+              <clipPath id="shore-mask-desktop" clipPathUnits="objectBoundingBox">
                 <path d="
                   M 0.48,0
                   L 1,0
@@ -96,38 +95,59 @@ export default function LandingPage() {
                   Z
                 " />
               </clipPath>
+              {/* MOBILE MASK: Flows from top, keeps bottom half pure white */}
+              <clipPath id="shore-mask-mobile" clipPathUnits="objectBoundingBox">
+                <path d="
+                  M 0,0
+                  L 1,0
+                  L 1,0.55
+                  C 0.8,0.6 0.6,0.45 0.4,0.55
+                  C 0.2,0.65 0.1,0.5 0,0.6
+                  Z
+                " />
+              </clipPath>
             </defs>
           </svg>
 
+          {/* Desktop Image */}
           <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center"
+            className="hidden lg:block absolute inset-0 w-full h-full bg-cover bg-center"
             style={{
               backgroundImage: "url('/coastal_ship_hero.jpg')",
-              clipPath: "url(#shore-mask)",
-              WebkitClipPath: "url(#shore-mask)",
+              clipPath: "url(#shore-mask-desktop)",
+              WebkitClipPath: "url(#shore-mask-desktop)",
+            }}
+          />
+          {/* Mobile Image */}
+          <div
+            className="block lg:hidden absolute inset-0 w-full h-full bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/coastal_ship_hero.jpg')",
+              clipPath: "url(#shore-mask-mobile)",
+              WebkitClipPath: "url(#shore-mask-mobile)",
             }}
           />
         </div>
 
-        {/* ---- HERO TEXT (Left side, clean white space) ---- */}
-        <div className="relative z-20 w-full px-6 md:px-12 lg:px-20 pt-36 pb-24 lg:pt-0 lg:pb-0">
-          <div className="max-w-md lg:max-w-lg">
-            <p className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 mb-5">
+        {/* ---- HERO TEXT ---- */}
+        <div className="relative z-20 w-full px-5 sm:px-8 md:px-12 lg:px-20 pt-20 pb-16 lg:pt-0 lg:pb-0">
+          <div className="max-w-md lg:max-w-lg mt-auto">
+            <p className="text-[10px] sm:text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 mb-4 sm:mb-5 drop-shadow-sm lg:drop-shadow-none">
               Connect anonymously
             </p>
-            <h1 className="font-heading text-[3.2rem] md:text-[4.5rem] lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.92] uppercase mb-6">
+            <h1 className="font-heading text-[3.5rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.92] uppercase mb-4 sm:mb-6">
               Go<br />Offshore
             </h1>
-            <p className="font-heading text-slate-500 text-lg md:text-xl font-semibold tracking-wide max-w-sm mb-10">
+            <p className="font-heading text-slate-500 text-base sm:text-lg md:text-xl font-semibold tracking-wide max-w-sm mb-8 sm:mb-10">
               Meet your people
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               <Link href={isOnboarded ? "/sea" : "/onboarding"}>
-                <Button className="rounded-full bg-coral-500 text-white hover:bg-coral-600 font-bold px-10 py-3.5 text-xs uppercase tracking-[0.2em] border-none shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                <Button className="rounded-full bg-coral-500 text-white hover:bg-coral-600 font-bold px-8 sm:px-10 py-3.5 text-[10px] sm:text-xs uppercase tracking-[0.2em] border-none shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
                   Set Sail
                 </Button>
               </Link>
-              <Link href="/islands" className="text-slate-500 hover:text-slate-800 text-xs font-semibold uppercase tracking-[0.15em] transition-colors">
+              <Link href="/islands" className="text-slate-500 hover:text-slate-800 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] transition-colors mt-2 sm:mt-0">
                 Explore Islands →
               </Link>
             </div>
