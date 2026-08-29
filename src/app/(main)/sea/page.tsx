@@ -166,4 +166,3 @@ function QuickActionCard({ href, icon, title, subtitle, bgClass, accentColor }: 
     </motion.div>
   );
 }
-}
