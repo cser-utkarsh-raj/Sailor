@@ -74,10 +74,10 @@ export default function LandingPage() {
       {/* ==========================================
           THE SHORE — SINGLE HERO
           ========================================== */}
-      <section className="relative w-full min-h-[100dvh] lg:min-h-screen flex items-end lg:items-center overflow-hidden">
+      <section className="relative w-full min-h-[100dvh] lg:min-h-screen flex flex-col justify-end lg:flex-row lg:items-center overflow-hidden bg-[#FDFBF7]">
 
-        {/* ---- ILLUSTRATED SCENE (Background) ---- */}
-        <div className="absolute inset-0 z-0">
+        {/* ---- ILLUSTRATED SCENE (Background on desktop, Top half on mobile) ---- */}
+        <div className="absolute top-0 left-0 w-full h-[65vh] lg:h-full lg:inset-0 z-0">
           <svg className="absolute w-0 h-0">
             <defs>
               {/* DESKTOP MASK: Organic split, keeps left side pure white */}
@@ -95,14 +95,14 @@ export default function LandingPage() {
                   Z
                 " />
               </clipPath>
-              {/* MOBILE MASK: Flows from top, keeps bottom half pure white */}
+              {/* MOBILE MASK: Flows from top, smooth wave at bottom */}
               <clipPath id="shore-mask-mobile" clipPathUnits="objectBoundingBox">
                 <path d="
                   M 0,0
                   L 1,0
-                  L 1,0.65
-                  C 0.8,0.7 0.6,0.55 0.4,0.65
-                  C 0.2,0.75 0.1,0.6 0,0.7
+                  L 1,0.85
+                  C 0.7,0.95 0.5,0.75 0.3,0.85
+                  C 0.1,0.95 0.05,0.8 0,0.9
                   Z
                 " />
               </clipPath>
@@ -118,9 +118,9 @@ export default function LandingPage() {
               WebkitClipPath: "url(#shore-mask-desktop)",
             }}
           />
-          {/* Mobile Image */}
+          {/* Mobile Image (Restricted Height) */}
           <div
-            className="block lg:hidden absolute inset-0 w-full h-full bg-cover bg-[70%_50%]"
+            className="block lg:hidden absolute inset-0 w-full h-full bg-cover bg-[center_top]"
             style={{
               backgroundImage: "url('/coastal_ship_hero.jpg')",
               clipPath: "url(#shore-mask-mobile)",
@@ -130,15 +130,15 @@ export default function LandingPage() {
         </div>
 
         {/* ---- HERO TEXT ---- */}
-        <div className="relative z-20 w-full px-5 sm:px-8 md:px-12 lg:px-20 pt-20 pb-16 lg:pt-0 lg:pb-0">
-          <div className="max-w-md lg:max-w-lg mt-auto">
-            <p className="text-[10px] sm:text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 mb-4 sm:mb-5 drop-shadow-sm lg:drop-shadow-none">
+        <div className="relative z-20 w-full px-5 sm:px-8 md:px-12 lg:px-20 pt-[55vh] pb-10 lg:pt-0 lg:pb-0">
+          <div className="max-w-md lg:max-w-lg mx-auto lg:mx-0">
+            <p className="text-[10px] sm:text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 mb-3 sm:mb-5">
               Connect anonymously
             </p>
-            <h1 className="font-heading text-[3.5rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.92] uppercase mb-4 sm:mb-6">
+            <h1 className="font-heading text-[3.8rem] sm:text-[4.5rem] md:text-[5rem] lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.9] uppercase mb-4 sm:mb-6">
               Go<br />Offshore
             </h1>
-            <p className="font-heading text-slate-500 text-base sm:text-lg md:text-xl font-semibold tracking-wide max-w-sm mb-8 sm:mb-10">
+            <p className="font-heading text-slate-500 text-lg sm:text-xl font-semibold tracking-wide max-w-sm mb-8 sm:mb-10">
               Meet your people
             </p>
             <div className="flex flex-wrap items-center gap-4">
