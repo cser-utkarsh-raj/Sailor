@@ -181,7 +181,7 @@ export default function ExplorePage() {
             <span className="font-heading font-extrabold tracking-widest text-slate-400 text-lg mt-1">SAILOR</span>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <p className="text-sm font-medium">© 2026 Sailor. Nobody sails alone.</p>
+            <p className="text-sm font-medium">© 2026 Sailor. Nobody Sails Alone</p>
             <div className="hidden md:block w-px h-6 bg-slate-200"></div>
             <div className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity cursor-default">
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Presented by</span>
