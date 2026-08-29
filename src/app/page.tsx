@@ -69,7 +69,13 @@ export default function LandingPage() {
       <section className="relative w-full min-h-screen flex items-end lg:items-center overflow-hidden">
 
         {/* ---- ILLUSTRATED SCENE (Right side) ---- */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 bg-[#FDFBF7]">
+          {/* Subtle 5% watermark of the full image behind the text on the left */}
+          <div
+            className="absolute inset-0 w-full h-full bg-cover bg-center opacity-[0.05]"
+            style={{ backgroundImage: "url('/coastal_ship_hero.jpg')" }}
+          />
+
           {/* SVG clipPath — organic irregular mask, pushed right so text has clean white space */}
           <svg className="absolute" width="0" height="0">
             <defs>
@@ -101,17 +107,18 @@ export default function LandingPage() {
           />
         </div>
 
-        {/* ---- HERO TEXT (Left side, clean white space) ---- */}
+        {/* ---- HERO TEXT (Left side, clean space) ---- */}
         <div className="relative z-20 w-full px-6 md:px-12 lg:px-20 pt-36 pb-24 lg:pt-0 lg:pb-0">
           <div className="max-w-md lg:max-w-lg">
-            <p className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 mb-5">
-              Sail anonymously
+            <p className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 mb-5">
+              Chat anonymously
             </p>
-            <h1 className="font-heading text-[3.2rem] md:text-[4.5rem] lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.92] uppercase mb-6">
-              Go<br />Offshore.
+            <h1 className="font-heading text-[3.2rem] md:text-[4.5rem] lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.92] uppercase mb-6 drop-shadow-sm">
+              Go<br />Offshore
             </h1>
-            <p className="text-slate-500 text-base md:text-lg leading-relaxed max-w-sm mb-10 font-medium">
-              Meet someone you&apos;ve never met.
+            <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-sm mb-10 font-medium">
+              <span className="font-bold text-slate-800 block mb-1">Meet your people.</span>
+              Connect with real people online and chat completely anonymously.
             </p>
             <div className="flex items-center gap-4">
               <Link href="/onboarding">
