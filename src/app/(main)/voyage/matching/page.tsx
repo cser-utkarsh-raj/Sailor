@@ -143,10 +143,10 @@ export default function MatchingPage() {
                 className="w-24 h-24 mb-4"
               />
               
-              <h3 className="text-2xl font-heading font-bold text-navy-900">{matchedSailor.sailorName}</h3>
-              <p className="text-navy-500 mb-4">{matchedSailor.countryFlag} {matchedSailor.country}</p>
+              <h3 className="text-2xl font-heading font-bold text-slate-800">{matchedSailor.sailorName}</h3>
+              <p className="text-slate-400 mb-4">{matchedSailor.countryFlag} {matchedSailor.country}</p>
               
-              <p className="italic text-navy-700 mb-6 text-sm px-4">&quot;{matchedSailor.bio}&quot;</p>
+              <p className="italic text-slate-500 mb-6 text-sm px-4">&quot;{matchedSailor.bio}&quot;</p>
               
               <div className="flex flex-wrap justify-center gap-2 mb-6">
                 {matchedSailor.interests?.map((interest: string) => (
@@ -166,7 +166,7 @@ export default function MatchingPage() {
                 </Button>
                 <Button 
                   variant="ghost" 
-                  className="w-full text-navy-500"
+                  className="w-full text-slate-400"
                   onClick={startMatching}
                 >
                   Keep Sailing

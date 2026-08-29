@@ -35,8 +35,8 @@ export default function CrewPage() {
           className="flex flex-col items-center"
         >
           <Anchor className="text-6xl text-ocean-300 mb-6 w-20 h-20" />
-          <h1 className="font-heading text-3xl font-bold text-navy-900 mb-2">Your crew is waiting</h1>
-          <p className="text-navy-600 mb-8 max-w-md">Set sail to meet someone new. Every great journey begins with a single connection.</p>
+          <h1 className="font-heading text-3xl font-bold text-slate-800 mb-2">Your crew is waiting</h1>
+          <p className="text-slate-500 mb-8 max-w-md">Set sail to meet someone new. Every great journey begins with a single connection.</p>
           <Link href="/voyage/matching">
             <Button variant="primary" size="lg">Set Sail</Button>
           </Link>
@@ -48,8 +48,8 @@ export default function CrewPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="mb-8">
-        <h1 className="font-heading text-3xl font-bold text-navy-900">My Crew</h1>
-        <p className="text-navy-500 mt-1">{crew.length} crew members</p>
+        <h1 className="font-heading text-3xl font-bold text-slate-800">My Crew</h1>
+        <p className="text-slate-400 mt-1">{crew.length} crew members</p>
       </div>
 
       <motion.div 
@@ -71,8 +71,8 @@ export default function CrewPage() {
                       countryFlag={member.sailorProfile.countryFlag} 
                     />
                     <div>
-                      <h3 className="font-heading font-semibold text-lg text-navy-900">{member.sailorProfile.sailorName}</h3>
-                      <p className="text-sm text-navy-600 flex items-center gap-1">
+                      <h3 className="font-heading font-semibold text-lg text-slate-800">{member.sailorProfile.sailorName}</h3>
+                      <p className="text-sm text-slate-500 flex items-center gap-1">
                         {member.sailorProfile.countryFlag} {member.sailorProfile.country}
                       </p>
                     </div>
@@ -80,7 +80,7 @@ export default function CrewPage() {
                 </div>
 
                 {member.sailorProfile.bio && (
-                  <p className="italic text-navy-600 text-sm mb-4 line-clamp-2 flex-grow">&quot;{member.sailorProfile.bio}&quot;</p>
+                  <p className="italic text-slate-500 text-sm mb-4 line-clamp-2 flex-grow">&quot;{member.sailorProfile.bio}&quot;</p>
                 )}
 
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -92,8 +92,8 @@ export default function CrewPage() {
                 </div>
 
                 <div className="mt-auto pt-4 border-t border-navy-100 flex flex-col gap-1">
-                  <span className="text-sm text-navy-500">Met on {member.metOn || 'Random Waters'}</span>
-                  <span className="text-xs text-navy-400">Added {new Date(member.addedAt || Date.now()).toLocaleDateString()}</span>
+                  <span className="text-sm text-slate-400">Met on {member.metOn || 'Random Waters'}</span>
+                  <span className="text-xs text-slate-400">Added {new Date(member.addedAt || Date.now()).toLocaleDateString()}</span>
                 </div>
               </div>
             </Card>

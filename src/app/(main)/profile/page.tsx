@@ -74,7 +74,7 @@ export default function ProfilePage() {
           >
             <Card className="p-4 sm:p-5 text-center shadow-lg hover:shadow-xl transition-shadow bg-white/90 backdrop-blur border-none ring-1 ring-black/5">
               <div className="text-2xl font-heading font-bold text-ocean-600 mb-0.5">{stat.value}</div>
-              <div className="text-xs font-medium text-navy-500 uppercase tracking-wider">{stat.label}</div>
+              <div className="text-xs font-medium text-slate-400 uppercase tracking-wider">{stat.label}</div>
             </Card>
           </motion.div>
         ))}
@@ -86,16 +86,16 @@ export default function ProfilePage() {
         <div className="md:col-span-2 space-y-8">
           {/* Interests */}
           <section>
-            <h2 className="font-heading text-xl font-bold text-navy-900 mb-4 px-1">Interests</h2>
+            <h2 className="font-heading text-xl font-bold text-slate-800 mb-4 px-1">Interests</h2>
             <Card className="p-6">
               <div className="flex flex-wrap gap-2">
                 {currentProfile.interests?.map(interest => (
-                  <Badge key={interest} variant="default" className="bg-navy-50 text-navy-700 hover:bg-navy-100 transition-colors py-1.5 px-3">
+                  <Badge key={interest} variant="default" className="bg-navy-50 text-slate-500 hover:bg-navy-100 transition-colors py-1.5 px-3">
                     {interest}
                   </Badge>
                 ))}
                 {(!currentProfile.interests || currentProfile.interests.length === 0) && (
-                  <p className="text-navy-500 text-sm">No interests added yet.</p>
+                  <p className="text-slate-400 text-sm">No interests added yet.</p>
                 )}
               </div>
             </Card>
@@ -103,7 +103,7 @@ export default function ProfilePage() {
 
           {/* Preferences */}
           <section>
-            <h2 className="font-heading text-xl font-bold text-navy-900 mb-4 px-1">I enjoy...</h2>
+            <h2 className="font-heading text-xl font-bold text-slate-800 mb-4 px-1">I enjoy...</h2>
             <Card className="p-6">
               <div className="flex flex-wrap gap-3">
                 {currentProfile.conversationPreferences?.map(pref => (
@@ -120,7 +120,7 @@ export default function ProfilePage() {
         <div className="space-y-8">
           {/* Achievements Snippet */}
           <section>
-            <h2 className="font-heading text-xl font-bold text-navy-900 mb-4 flex items-center gap-2 px-1">
+            <h2 className="font-heading text-xl font-bold text-slate-800 mb-4 flex items-center gap-2 px-1">
               <Award className="w-5 h-5 text-sunny-500" /> Milestones
             </h2>
             <Card className="p-5">
@@ -129,8 +129,8 @@ export default function ProfilePage() {
                   <div key={achievement.id} className={`flex items-center gap-3 ${!achievement.unlockedAt ? 'opacity-50 grayscale' : ''}`}>
                     <div className="text-2xl bg-navy-50 p-2 rounded-lg">{achievement.emoji}</div>
                     <div>
-                      <div className="font-medium text-navy-900 text-sm">{achievement.name}</div>
-                      <div className="text-xs text-navy-500 line-clamp-1">{achievement.description}</div>
+                      <div className="font-medium text-slate-800 text-sm">{achievement.name}</div>
+                      <div className="text-xs text-slate-400 line-clamp-1">{achievement.description}</div>
                     </div>
                   </div>
                 ))}
@@ -145,7 +145,7 @@ export default function ProfilePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
-        className="flex items-center justify-center gap-2 text-sm text-navy-400 pt-8"
+        className="flex items-center justify-center gap-2 text-sm text-slate-400 pt-8"
       >
         <Shield className="w-4 h-4" />
         <p>Your real identity is never shared with other sailors.</p>

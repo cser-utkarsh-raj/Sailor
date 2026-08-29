@@ -54,7 +54,7 @@ function BringAboardContent() {
               ⚓
             </div>
             
-            <h1 className="text-2xl font-heading font-bold text-navy-900 mb-2">Enjoying the voyage?</h1>
+            <h1 className="text-2xl font-heading font-bold text-slate-800 mb-2">Enjoying the voyage?</h1>
             
             <div className="flex items-center gap-3 my-6 p-4 bg-ocean-50 rounded-2xl w-full justify-center">
               <Avatar 
@@ -66,7 +66,7 @@ function BringAboardContent() {
               <span className="font-heading font-bold text-lg text-ocean-900">{sailor.sailorName}</span>
             </div>
             
-            <p className="text-navy-600 mb-8">Would you like to add them to your crew?</p>
+            <p className="text-slate-500 mb-8">Would you like to add them to your crew?</p>
             
             <div className="w-full space-y-3">
               <Button 
@@ -80,7 +80,7 @@ function BringAboardContent() {
               <Button 
                 variant="ghost" 
                 size="lg"
-                className="w-full text-navy-500"
+                className="w-full text-slate-400"
                 onClick={() => router.push('/sea')}
               >
                 Not this time
@@ -139,10 +139,10 @@ function BringAboardContent() {
               />
             </div>
             
-            <h2 className="text-2xl font-heading font-bold text-navy-900 mb-2">
+            <h2 className="text-2xl font-heading font-bold text-slate-800 mb-2">
               <span className="text-coral-500">⚓</span> {sailor.sailorName} joined your Crew!
             </h2>
-            <p className="text-navy-500 mb-8">You can now view their profile and send them direct messages anytime.</p>
+            <p className="text-slate-400 mb-8">You can now view their profile and send them direct messages anytime.</p>
             
             <div className="w-full space-y-3">
               <Button 

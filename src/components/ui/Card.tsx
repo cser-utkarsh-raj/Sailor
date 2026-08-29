@@ -36,8 +36,8 @@ export default function Card({
   return (
     <Component
       className={`
-        bg-white rounded-2xl shadow-sm border border-ocean-100
-        ${hover || onClick ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}
+        bg-white/80 backdrop-blur-sm rounded-3xl border border-slate-200/60 shadow-[0_8px_30px_rgba(0,0,0,0.04)]
+        ${hover || onClick ? 'cursor-pointer hover:shadow-[0_15px_40px_rgba(0,0,0,0.08)] transition-all duration-300' : ''}
         ${paddingStyles[padding]}
         ${className}
       `}

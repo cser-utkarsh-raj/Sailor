@@ -40,7 +40,7 @@ export default function JournalPage() {
                 <stat.icon className="w-6 h-6" />
               </div>
               <div className="text-3xl font-heading font-bold text-ocean-600 mb-1">{stat.value}</div>
-              <div className="text-sm font-medium text-navy-600 uppercase tracking-wider">{stat.label}</div>
+              <div className="text-sm font-medium text-slate-500 uppercase tracking-wider">{stat.label}</div>
             </Card>
           </motion.div>
         ))}
@@ -48,7 +48,7 @@ export default function JournalPage() {
 
       {/* Timeline Section */}
       <div>
-        <h2 className="font-heading text-2xl font-bold text-navy-900 mb-8 flex items-center gap-2">
+        <h2 className="font-heading text-2xl font-bold text-slate-800 mb-8 flex items-center gap-2">
           <Calendar className="text-ocean-500" />
           Your Journey
         </h2>
@@ -74,7 +74,7 @@ export default function JournalPage() {
                   {/* Left Side (Desktop) */}
                   <div className={`hidden md:block w-1/2 pr-8 text-right ${isEven ? '' : 'md:hidden'}`}>
                     {isEven && (
-                      <span className="text-sm font-medium text-navy-500">
+                      <span className="text-sm font-medium text-slate-400">
                         {new Date(voyage.date || Date.now()).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
                     )}
@@ -88,7 +88,7 @@ export default function JournalPage() {
                   {/* Right Side / Mobile Layout */}
                   <div className={`w-full ml-14 md:ml-0 md:w-1/2 ${isEven ? 'md:pl-8' : 'md:pr-8 md:text-right'}`}>
                     {/* Mobile Date */}
-                    <div className="md:hidden text-xs font-medium text-navy-500 mb-1">
+                    <div className="md:hidden text-xs font-medium text-slate-400 mb-1">
                       {new Date(voyage.date || Date.now()).toLocaleDateString()}
                     </div>
                     
@@ -98,11 +98,11 @@ export default function JournalPage() {
                           <div className="bg-ocean-50 p-1.5 rounded-full text-ocean-600">
                             {voyage.type === 'island' ? <TreePalm size={18} /> : <MapPin size={18} />}
                           </div>
-                          <span className="font-heading font-semibold text-navy-900 text-lg">
+                          <span className="font-heading font-semibold text-slate-800 text-lg">
                             {voyage.type === 'island' ? voyage.islandName : voyage.metSailorName || 'Unknown Sailor'}
                           </span>
                         </div>
-                        <p className="text-sm text-navy-600 mb-3">
+                        <p className="text-sm text-slate-500 mb-3">
                           {voyage.type === 'island' ? 'Island Community' : 'Random Waters'}
                         </p>
                         {broughtAboard && (
@@ -117,7 +117,7 @@ export default function JournalPage() {
                   {/* Left Side (Desktop alternate) */}
                   <div className={`hidden md:block w-1/2 pl-8 ${isEven ? 'md:hidden' : ''}`}>
                     {!isEven && (
-                      <span className="text-sm font-medium text-navy-500">
+                      <span className="text-sm font-medium text-slate-400">
                         {new Date(voyage.date || Date.now()).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
                     )}
@@ -127,7 +127,7 @@ export default function JournalPage() {
             })}
 
             {(!voyageHistory || voyageHistory.length === 0) && (
-              <div className="text-center py-12 text-navy-500">No voyages recorded yet.</div>
+              <div className="text-center py-12 text-slate-400">No voyages recorded yet.</div>
             )}
           </div>
         </div>
@@ -135,7 +135,7 @@ export default function JournalPage() {
 
       {/* Achievements Section */}
       <div className="pt-8">
-        <h2 className="font-heading text-2xl font-bold text-navy-900 mb-6 flex items-center gap-2">
+        <h2 className="font-heading text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
           <Award className="text-sunny-500" />
           Milestones
         </h2>
@@ -158,14 +158,14 @@ export default function JournalPage() {
                     })()}
                     {!isUnlocked && (
                       <div className="absolute -bottom-1 -right-1 bg-navy-100 rounded-full p-1">
-                        <Lock className="w-3 h-3 text-navy-600" />
+                        <Lock className="w-3 h-3 text-slate-500" />
                       </div>
                     )}
                   </div>
-                  <h4 className={`font-semibold text-sm mb-1 ${isUnlocked ? 'text-navy-900' : 'text-navy-600'}`}>
+                  <h4 className={`font-semibold text-sm mb-1 ${isUnlocked ? 'text-slate-800' : 'text-slate-500'}`}>
                     {achievement.name}
                   </h4>
-                  <p className="text-xs text-navy-500 leading-snug">
+                  <p className="text-xs text-slate-400 leading-snug">
                     {achievement.description}
                   </p>
                 </Card>

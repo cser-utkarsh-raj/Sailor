@@ -46,10 +46,10 @@ export default function BottlesPage() {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 relative min-h-[80vh]">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
         <div>
-          <h1 className="font-heading text-3xl font-bold text-navy-900 flex items-center gap-2">
+          <h1 className="font-heading text-3xl font-bold text-slate-800 flex items-center gap-2">
             Message in a Bottle 📨
           </h1>
-          <p className="text-navy-600 mt-1">Mysterious messages from across the sea.</p>
+          <p className="text-slate-500 mt-1">Mysterious messages from across the sea.</p>
         </div>
         <Button 
           variant="primary" 
@@ -69,8 +69,8 @@ export default function BottlesPage() {
           >
             🍾
           </motion.div>
-          <h3 className="text-xl font-heading font-semibold text-navy-900">The sea is quiet... for now.</h3>
-          <p className="text-navy-500 mt-2">Send a message to a random sailor somewhere in the world.</p>
+          <h3 className="text-xl font-heading font-semibold text-slate-800">The sea is quiet... for now.</h3>
+          <p className="text-slate-400 mt-2">Send a message to a random sailor somewhere in the world.</p>
         </div>
       ) : (
         <div className="space-y-6">
@@ -90,19 +90,19 @@ export default function BottlesPage() {
                         <Wine className="text-ocean-500 w-6 h-6" />
                       </div>
                       <div>
-                        <div className="font-heading font-semibold text-navy-900">Unknown Sailor</div>
-                        <div className="text-xs text-navy-500">Arrived {new Date(bottle.sentAt || Date.now()).toLocaleDateString()}</div>
+                        <div className="font-heading font-semibold text-slate-800">Unknown Sailor</div>
+                        <div className="text-xs text-slate-400">Arrived {new Date(bottle.sentAt || Date.now()).toLocaleDateString()}</div>
                       </div>
                     </div>
                     {getStatusBadge(bottle.status)}
                   </div>
 
                   {bottle.status === 'unread' && (
-                    <p className="text-sm italic text-navy-400 mb-2">A bottle washed ashore...</p>
+                    <p className="text-sm italic text-slate-400 mb-2">A bottle washed ashore...</p>
                   )}
                   
                   <div className="bg-white p-4 rounded-xl shadow-inner border border-navy-50 mb-4">
-                    <p className="italic text-navy-700">&quot;{bottle.message}&quot;</p>
+                    <p className="italic text-slate-500">&quot;{bottle.message}&quot;</p>
                   </div>
 
                   {bottle.status !== 'replied' && bottle.status !== 'ignored' ? (
@@ -171,7 +171,7 @@ export default function BottlesPage() {
 
       <Modal isOpen={isComposeOpen} onClose={() => setIsComposeOpen(false)} title="Send a Bottle">
         <div className="space-y-4">
-          <p className="text-sm text-navy-600">Your message will wash up on the shores of a random sailor somewhere in the world.</p>
+          <p className="text-sm text-slate-500">Your message will wash up on the shores of a random sailor somewhere in the world.</p>
           <Textarea 
             placeholder="What's on your mind? A thought, a poem, a greeting..."
             value={composeText}

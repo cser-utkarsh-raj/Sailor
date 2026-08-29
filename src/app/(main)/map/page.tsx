@@ -26,8 +26,8 @@ export default function MapPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col min-h-[calc(100vh-80px)]">
       <div className="mb-6 flex justify-between items-end">
         <div>
-          <h1 className="font-heading text-4xl font-bold text-navy-900 mb-2">Your Voyage Map</h1>
-          <p className="text-navy-600 text-lg">Every conversation is a journey.</p>
+          <h1 className="font-heading text-4xl font-bold text-slate-800 mb-2">Your Voyage Map</h1>
+          <p className="text-slate-500 text-lg">Every conversation is a journey.</p>
         </div>
         <Link href="/map/journal">
           <Button variant="secondary">View Your Journal</Button>
@@ -59,7 +59,7 @@ export default function MapPage() {
             <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-ocean-500 z-10">
               <Home className="text-ocean-600 w-5 h-5" />
             </div>
-            <div className="mt-2 bg-white/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-navy-700 shadow-sm border border-navy-100 flex items-center gap-1.5">
+            <div className="mt-2 bg-white/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-500 shadow-sm border border-navy-100 flex items-center gap-1.5">
               <span>🇮🇳</span> India
             </div>
           </motion.div>
@@ -121,8 +121,8 @@ export default function MapPage() {
           {(!voyageHistory || voyageHistory.length === 0) && (
             <div className="absolute inset-0 flex items-center justify-center flex-col text-center opacity-60">
               <Navigation className="w-16 h-16 text-ocean-300 mb-4" />
-              <p className="text-navy-600 font-medium">Your map is empty.</p>
-              <p className="text-sm text-navy-500">Take a voyage to discover new lands.</p>
+              <p className="text-slate-500 font-medium">Your map is empty.</p>
+              <p className="text-sm text-slate-400">Take a voyage to discover new lands.</p>
             </div>
           )}
         </div>

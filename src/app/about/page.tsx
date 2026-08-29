@@ -10,6 +10,7 @@ import { useSailor } from "@/lib/store/sailor-context";
 export default function AboutPage() {
   const { isOnboarded } = useSailor();
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [showInstallTip, setShowInstallTip] = useState(false);
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -33,9 +34,9 @@ export default function AboutPage() {
             <Link href="/explore" className="hover:text-slate-800 transition-colors">Explore</Link>
             <Link href="/islands" className="hover:text-slate-800 transition-colors">Islands</Link>
             <Link href="/about" className="text-slate-800">About</Link>
-            <Link href="/login" className="hover:text-slate-800 transition-colors">Log In</Link>
+            {!isOnboarded && <Link href="/onboarding" className="hover:text-slate-800 transition-colors">Log In</Link>}
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 relative">
             <button
               onClick={() => {
                 if (deferredPrompt) {
@@ -44,7 +45,8 @@ export default function AboutPage() {
                     if (choiceResult.outcome === 'accepted') setDeferredPrompt(null);
                   });
                 } else {
-                  alert("To install the app, look for the install icon in your browser's address bar or menu (Add to Home Screen).");
+                  setShowInstallTip(true);
+                  setTimeout(() => setShowInstallTip(false), 5000);
                 }
               }}
               className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors flex items-center gap-2 shadow-sm hover:shadow-md hover:-translate-y-0.5"
@@ -52,6 +54,13 @@ export default function AboutPage() {
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               Download App
             </button>
+
+            {showInstallTip && (
+              <div className="absolute top-full right-0 mt-2 w-64 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-xl z-50 border border-slate-700 animate-in fade-in slide-in-from-top-2">
+                <p>To install, click the <strong>install icon</strong> in your browser's address bar (near the bookmark star).</p>
+                <div className="absolute -top-1 right-8 w-2 h-2 bg-slate-900 rotate-45 border-l border-t border-slate-700"></div>
+              </div>
+            )}
           </div>
         </div>
       </nav>
@@ -162,8 +171,8 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="flex gap-6 text-sm font-bold uppercase tracking-widest">
-            <a href="#" className="hover:text-slate-700 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-slate-700 transition-colors">Terms</a>
+            <Link href="/about" className="hover:text-slate-700 transition-colors">Privacy</Link>
+            <Link href="/about" className="hover:text-slate-700 transition-colors">Terms</Link>
           </div>
         </div>
       </footer>

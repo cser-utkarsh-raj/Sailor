@@ -13,20 +13,20 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onA
 
 const variantStyles = {
   primary:
-    'bg-coral-500 hover:bg-coral-600 text-white shadow-md hover:shadow-lg',
+    'bg-slate-900 hover:bg-slate-800 text-white shadow-md hover:shadow-lg uppercase tracking-wider font-bold text-xs',
   secondary:
-    'bg-white hover:bg-ocean-50 text-navy-800 border-2 border-ocean-200 hover:border-ocean-300 shadow-sm',
+    'bg-white/80 backdrop-blur-sm hover:bg-white text-slate-800 border border-slate-200 hover:border-slate-300 shadow-sm uppercase tracking-wider font-bold text-xs',
   ghost:
-    'bg-transparent hover:bg-ocean-50 text-navy-700 hover:text-navy-900',
+    'bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold',
   danger:
-    'bg-danger-500 hover:bg-danger-600 text-white shadow-md',
+    'bg-rose-500 hover:bg-rose-600 text-white shadow-md uppercase tracking-wider font-bold text-xs',
 };
 
 const sizeStyles = {
-  sm: 'px-4 py-2 text-sm rounded-xl',
-  md: 'px-6 py-3 text-base rounded-2xl',
-  lg: 'px-8 py-4 text-lg rounded-2xl',
-  xl: 'px-10 py-5 text-xl rounded-3xl',
+  sm: 'px-4 py-2 rounded-full',
+  md: 'px-6 py-3 rounded-full',
+  lg: 'px-8 py-4 rounded-full',
+  xl: 'px-10 py-5 rounded-full',
 };
 
 export default function Button({

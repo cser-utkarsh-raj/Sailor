@@ -25,8 +25,8 @@ export default function IslandsPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="mb-10">
-        <h1 className="font-heading text-4xl font-bold text-navy-900 mb-2">Explore Islands</h1>
-        <p className="text-navy-600 text-lg">Each island is a community. Find yours.</p>
+        <h1 className="font-heading text-4xl font-bold text-slate-800 mb-2">Explore Islands</h1>
+        <p className="text-slate-500 text-lg">Each island is a community. Find yours.</p>
       </div>
 
       <motion.div 
@@ -69,9 +69,9 @@ export default function IslandsPage() {
               </div>
 
               <div className="p-6">
-                <h3 className="font-heading text-xl font-bold text-navy-900">{island.name}</h3>
-                <p className="text-navy-500 text-sm font-medium mt-1 mb-3">{island.theme}</p>
-                <p className="text-navy-600 mb-6 line-clamp-2 min-h-[3rem]">{island.description}</p>
+                <h3 className="font-heading text-xl font-bold text-slate-800">{island.name}</h3>
+                <p className="text-slate-400 text-sm font-medium mt-1 mb-3">{island.theme}</p>
+                <p className="text-slate-500 mb-6 line-clamp-2 min-h-[3rem]">{island.description}</p>
                 
                 <div className="flex items-center justify-end">
                   <Link href="/voyage/matching">

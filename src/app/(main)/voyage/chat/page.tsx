@@ -80,7 +80,7 @@ function ChatContent() {
     <div className="flex flex-col h-[100dvh] bg-gray-50 md:h-[calc(100vh-8rem)] relative">
       <header className="flex-none h-16 bg-white border-b border-ocean-100 flex items-center justify-between px-4 z-10 sticky top-0">
         <div className="flex items-center gap-3">
-          <button onClick={handleLeave} className="p-2 -ml-2 text-navy-500 hover:text-ocean-600 transition-colors">
+          <button onClick={handleLeave} className="p-2 -ml-2 text-slate-400 hover:text-ocean-600 transition-colors">
             <ChevronLeft size={24} />
           </button>
           <div className="flex items-center gap-2">
@@ -90,14 +90,14 @@ function ChatContent() {
               color={sailor.avatarColor}
               size="sm" 
             />
-            <span className="font-heading font-semibold text-navy-900">{sailor.sailorName}</span>
+            <span className="font-heading font-semibold text-slate-800">{sailor.sailorName}</span>
           </div>
         </div>
         
         <div className="relative">
           <button 
             onClick={() => setShowMenu(!showMenu)}
-            className="p-2 text-navy-500 hover:text-ocean-600"
+            className="p-2 text-slate-400 hover:text-ocean-600"
           >
             <MoreHorizontal size={24} />
           </button>
@@ -110,10 +110,10 @@ function ChatContent() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 className="absolute right-0 top-12 bg-white shadow-lg rounded-xl border border-gray-100 py-2 w-48 z-20"
               >
-                <button onClick={handleLeave} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-navy-700 text-sm">
+                <button onClick={handleLeave} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-slate-500 text-sm">
                   Leave Voyage
                 </button>
-                <button className="w-full text-left px-4 py-2 hover:bg-gray-50 text-navy-700 text-sm flex items-center gap-2">
+                <button className="w-full text-left px-4 py-2 hover:bg-gray-50 text-slate-500 text-sm flex items-center gap-2">
                   <Flag size={14} /> Report Sailor
                 </button>
                 <button className="w-full text-left px-4 py-2 hover:bg-gray-50 text-coral-600 text-sm flex items-center gap-2">
@@ -145,12 +145,12 @@ function ChatContent() {
               className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
                 msg.isMine 
                   ? 'bg-ocean-500 text-white rounded-tr-sm' 
-                  : 'bg-white border border-ocean-100 text-navy-900 rounded-tl-sm shadow-sm'
+                  : 'bg-white border border-ocean-100 text-slate-800 rounded-tl-sm shadow-sm'
               }`}
             >
               <p className="text-[15px] leading-relaxed break-words">{msg.text}</p>
             </div>
-            <span className="text-[10px] text-navy-400 mt-1 px-1">
+            <span className="text-[10px] text-slate-400 mt-1 px-1">
               {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
           </motion.div>
@@ -182,7 +182,7 @@ function ChatContent() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Type a message..."
-              className="w-full bg-transparent outline-none text-navy-900 placeholder:text-navy-400"
+              className="w-full bg-transparent outline-none text-slate-800 placeholder:text-slate-400"
             />
           </div>
           <button 
@@ -208,8 +208,8 @@ function ChatContent() {
             <div className="w-10 h-10 bg-coral-50 text-coral-500 rounded-full flex items-center justify-center mb-2">
               <Anchor size={20} />
             </div>
-            <h3 className="font-heading font-semibold text-navy-900 mb-1">Enjoying the voyage?</h3>
-            <p className="text-xs text-navy-500 mb-4">Don&apos;t lose touch with {sailor.sailorName}. Add them to your crew!</p>
+            <h3 className="font-heading font-semibold text-slate-800 mb-1">Enjoying the voyage?</h3>
+            <p className="text-xs text-slate-400 mb-4">Don&apos;t lose touch with {sailor.sailorName}. Add them to your crew!</p>
             <div className="flex w-full gap-2">
               <Button 
                 variant="ghost" 
