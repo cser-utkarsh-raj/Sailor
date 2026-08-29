@@ -42,26 +42,22 @@ export default function LandingPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            {deferredPrompt ? (
-              <button
-                onClick={() => {
+            <button
+              onClick={() => {
+                if (deferredPrompt) {
                   deferredPrompt.prompt();
                   deferredPrompt.userChoice.then((choiceResult: any) => {
                     if (choiceResult.outcome === 'accepted') setDeferredPrompt(null);
                   });
-                }}
-                className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors flex items-center gap-2 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download App
-              </button>
-            ) : (
-              <Link href={isOnboarded ? "/sea" : "/onboarding"}>
-                <button className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                  Set Sail
-                </button>
-              </Link>
-            )}
+                } else {
+                  alert("To install the app, look for the install icon in your browser's address bar or menu (Add to Home Screen).");
+                }
+              }}
+              className="bg-slate-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full hover:bg-slate-700 transition-colors flex items-center gap-2 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download App
+            </button>
           </div>
         </div>
       </nav>
@@ -108,13 +104,13 @@ export default function LandingPage() {
         <div className="relative z-20 w-full px-6 md:px-12 lg:px-20 pt-36 pb-24 lg:pt-0 lg:pb-0">
           <div className="max-w-md lg:max-w-lg">
             <p className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 mb-5">
-              Sail anonymously
+              Connect anonymously
             </p>
             <h1 className="font-heading text-[3.2rem] md:text-[4.5rem] lg:text-[5.5rem] font-extrabold text-slate-800 tracking-tight leading-[0.92] uppercase mb-6">
-              Go<br />Offshore.
+              Go<br />Offshore
             </h1>
             <p className="text-slate-500 text-base md:text-lg leading-relaxed max-w-sm mb-10 font-medium">
-              Meet someone you&apos;ve never met.
+              Meet your people.
             </p>
             <div className="flex items-center gap-4">
               <Link href={isOnboarded ? "/sea" : "/onboarding"}>
