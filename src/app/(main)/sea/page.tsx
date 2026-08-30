@@ -28,27 +28,12 @@ export default function SeaPage() {
       transition={{ duration: 0.5 }}
       className="space-y-12"
     >
-      <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-4 pb-2">
-        <div>
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
-            {new Date().toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' })}
-          </p>
-          <h1 className="text-4xl sm:text-5xl font-heading font-extrabold tracking-tight text-slate-800 uppercase">
-            {greeting},<br />Sailor
-          </h1>
-        </div>
-        <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50/50 px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-sky-700 shadow-sm self-start sm:self-auto">
-          <span className="h-2 w-2 rounded-full bg-sky-400 animate-pulse" /> Live at sea
-        </div>
-      </header>
-
-      {/* Main CTA Section (Launch Graphic style) */}
-      <section className="relative w-full rounded-[2.5rem] overflow-hidden shadow-sm bg-[#FDFBF7] min-h-[500px] flex items-center">
-        {/* Background Image with Mask */}
-        <div className="absolute inset-0 z-0">
+      <header className="relative flex flex-col justify-end pt-12 pb-8 px-6 md:px-12 lg:px-20 -mx-6 md:-mx-12 lg:-mx-20 overflow-hidden mb-12 min-h-[300px] md:min-h-[400px]">
+        {/* Background Image with mask for Header */}
+        <div className="absolute inset-0 z-0 bg-[#FDFBF7]">
           <svg className="absolute w-0 h-0">
             <defs>
-              <clipPath id="sea-mask-desktop" clipPathUnits="objectBoundingBox">
+              <clipPath id="header-mask-desktop" clipPathUnits="objectBoundingBox">
                 <path d="
                   M 0.35,0
                   L 1,0
@@ -62,13 +47,13 @@ export default function SeaPage() {
                   Z
                 " />
               </clipPath>
-              <clipPath id="sea-mask-mobile" clipPathUnits="objectBoundingBox">
+              <clipPath id="header-mask-mobile" clipPathUnits="objectBoundingBox">
                 <path d="
                   M 0,0
                   L 1,0
-                  L 1,0.7
-                  C 0.7,0.85 0.5,0.55 0.3,0.7
-                  C 0.1,0.85 0.05,0.6 0,0.8
+                  L 1,1
+                  C 0.7,0.9 0.5,1 0.3,0.9
+                  C 0.1,0.8 0.05,0.95 0,1
                   Z
                 " />
               </clipPath>
@@ -76,38 +61,57 @@ export default function SeaPage() {
           </svg>
           
           <div
-            className="hidden md:block absolute inset-0 w-full h-full bg-cover bg-center"
+            className="hidden md:block absolute inset-0 w-full h-full bg-cover bg-center opacity-100"
             style={{
               backgroundImage: "url('/coastal_ship_hero.jpg')",
-              clipPath: "url(#sea-mask-desktop)",
-              WebkitClipPath: "url(#sea-mask-desktop)",
+              clipPath: "url(#header-mask-desktop)",
+              WebkitClipPath: "url(#header-mask-desktop)",
             }}
           />
           <div
-            className="block md:hidden absolute top-0 left-0 w-full h-[60%] bg-cover bg-[center_top]"
+            className="block md:hidden absolute top-0 right-0 w-full h-full bg-cover bg-[center_top] opacity-60"
             style={{
               backgroundImage: "url('/coastal_ship_hero.jpg')",
-              clipPath: "url(#sea-mask-mobile)",
-              WebkitClipPath: "url(#sea-mask-mobile)",
+              clipPath: "url(#header-mask-mobile)",
+              WebkitClipPath: "url(#header-mask-mobile)",
             }}
           />
         </div>
 
-        <div className="relative z-10 p-10 md:p-14 lg:p-16 flex flex-col items-center md:items-start text-center md:text-left mt-40 md:mt-0">
-          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">Open waters / 01</p>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight text-slate-800 uppercase leading-[0.9] mb-6">
-            Ready to meet<br />someone new?
-          </h2>
-          <p className="text-slate-500 font-semibold mb-8 max-w-sm">
-            Set sail into the unknown and match with a random sailor. No algorithms, just the ocean.
+        <div className="relative z-10 w-full max-w-xl">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">
+            {new Date().toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' })}
           </p>
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <Button onClick={() => router.push('/voyage')} className="rounded-full bg-slate-900 text-white hover:bg-slate-800 font-bold px-8 py-4 text-[11px] uppercase tracking-[0.2em] border-none shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
-              Go Offshore
-            </Button>
-            <Button onClick={() => router.push('/islands')} className="rounded-full bg-white text-slate-800 border-2 border-slate-200 hover:border-slate-300 font-bold px-8 py-4 text-[11px] uppercase tracking-[0.2em] shadow-sm hover:shadow transition-all">
-              Browse Islands
-            </Button>
+          <h1 className="text-4xl sm:text-5xl font-heading font-extrabold tracking-tight text-slate-900 uppercase">
+            {greeting},<br />Sailor
+          </h1>
+        </div>
+      </header>
+
+      {/* Main CTA Section (Ocean Band style) */}
+      <section className="relative w-full rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(2,132,199,0.08)]">
+        {/* Gradient ocean background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#e0f2fe] via-[#bae6fd] to-[#7dd3fc] z-0" />
+        
+        {/* Subtle animated wave lines */}
+        <svg className="absolute bottom-0 left-0 w-full h-32 opacity-30" viewBox="0 0 1440 100" preserveAspectRatio="none">
+          <path d="M0,50 C200,80 400,20 600,60 C800,90 1000,30 1200,65 C1350,80 1400,50 1440,60 L1440,100 L0,100 Z" fill="none" stroke="#0284c7" strokeWidth="2"/>
+        </svg>
+
+        <div className="relative z-10 p-10 md:p-14 lg:p-16 flex flex-col md:flex-row items-center md:items-end justify-between gap-10">
+          <div className="max-w-xl text-center md:text-left">
+            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.25em] text-sky-800/70">Open waters / 01</p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold tracking-tight text-slate-800 uppercase leading-[1.1] mb-4">
+              Ready to meet<br />someone new?
+            </h2>
+            <p className="text-sky-900/80 font-medium mb-8">
+              Set sail into the unknown and match with a random sailor.<br className="hidden sm:block"/> No algorithms, just the ocean.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <Button onClick={() => router.push('/voyage')} className="rounded-full bg-slate-900 text-white hover:bg-slate-800 font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] border-none shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">
+                Go Offshore
+              </Button>
+            </div>
           </div>
         </div>
       </section>

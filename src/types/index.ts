@@ -17,6 +17,9 @@ export interface SailorProfile {
   sailorName: string;
   country: string;
   countryFlag: string;
+  gender?: string;
+  title?: string;
+  titleFlag?: string;
   languages: string[];
   interests: string[];
   bio: string;

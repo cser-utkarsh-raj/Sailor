@@ -108,6 +108,7 @@ export default function OnboardingPage() {
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [country, setCountry] = useState<{name: string, flag: string} | null>(null);
   const [countrySearch, setCountrySearch] = useState("");
+  const [gender, setGender] = useState("");
   const [languages, setLanguages] = useState<string[]>([]);
   const [interests, setInterests] = useState<string[]>([]);
 
@@ -132,11 +133,14 @@ export default function OnboardingPage() {
     }
 
     setCurrentProfile({
-      userId: currentUser?.id || `user-${Date.now()}`,
+      userId: "mock-user-id",
       sailorName: name || "Anonymous Sailor",
       isAnonymous,
       country: country?.name || "Unknown",
       countryFlag: country?.flag || "🏴‍☠️",
+      gender: gender || "Not specified",
+      title: "Drifter",
+      titleFlag: "🌊",
       languages,
       interests,
       createdAt: new Date().toISOString(),
@@ -326,35 +330,81 @@ export default function OnboardingPage() {
               className="w-full flex flex-col items-center max-w-md"
             >
               <h2 className="font-heading font-extrabold text-2xl md:text-3xl text-slate-900 mb-8 tracking-tight text-center">
-                Select your Title
+                About You
               </h2>
               
-              <div className="grid grid-cols-2 gap-4 w-full mb-10">
-                {TITLES.map((t) => (
-                  <button
-                    key={t.name}
-                    onClick={() => {
-                      setCountry({ name: t.name, flag: t.flag });
-                      handleNext();
+              <div className="w-full space-y-6 mb-8">
+                {/* Country */}
+                <div className="relative">
+                  <label className="block text-xs uppercase tracking-widest text-slate-500 font-bold mb-2">Country</label>
+                  <Input 
+                    placeholder="Type your country..." 
+                    value={countrySearch}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setCountrySearch(val);
+                      const found = findCountryFlag(val);
+                      if (found && found.flag !== "🏴‍☠️") {
+                        setCountry(found);
+                      } else {
+                        setCountry(null);
+                      }
                     }}
-                    className={`flex flex-col items-center justify-center gap-2 py-6 rounded-[2rem] border transition-all ${
-                      country?.name === t.name 
-                        ? 'border-slate-800 bg-slate-50' 
-                        : 'border-slate-200 bg-white hover:border-slate-300'
-                    }`}
+                    className="w-full bg-white border-slate-200"
+                  />
+                  {countrySearch.trim() && !country && (
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-slate-100 rounded-xl shadow-lg overflow-hidden z-20">
+                      {getCountrySuggestions(countrySearch).map((c) => (
+                        <button
+                          key={c.name}
+                          onClick={() => {
+                            setCountry(c);
+                            setCountrySearch(c.name);
+                          }}
+                          className="w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-b-0"
+                        >
+                          <span className="text-2xl">{c.flag}</span>
+                          <span className="font-medium text-slate-800">{c.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {country && (
+                    <div className="mt-3 flex items-center gap-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                      <span className="text-2xl">{country.flag}</span>
+                      <span className="font-bold text-slate-800">{country.name}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Gender */}
+                <div>
+                  <label className="block text-xs uppercase tracking-widest text-slate-500 font-bold mb-2">Gender</label>
+                  <select 
+                    value={gender} 
+                    onChange={(e) => setGender(e.target.value)}
+                    className="w-full p-4 rounded-2xl bg-white border border-slate-200 outline-none focus:border-slate-400 transition-colors"
                   >
-                    <span className="text-4xl mb-1">{t.flag}</span>
-                    <span className="font-bold text-[11px] tracking-widest uppercase text-slate-800">{t.name}</span>
-                  </button>
-                ))}
+                    <option value="">Select your gender...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Non-binary">Non-binary</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </select>
+                </div>
               </div>
               
+              <Button 
+                className="w-full rounded-[2rem] bg-slate-900 text-white hover:bg-slate-800 font-bold py-4 text-[11px] uppercase tracking-[0.2em] shadow-md hover:-translate-y-0.5 transition-all mb-4"
+                onClick={handleNext}
+                disabled={!country && !gender}
+              >
+                Continue
+              </Button>
+
               <button 
                 className="text-slate-500 font-semibold uppercase tracking-widest text-[10px] hover:text-slate-800 transition-colors" 
-                onClick={() => {
-                  if (!country) setCountry({ name: 'Drifter', flag: '🌊' });
-                  handleNext();
-                }}
+                onClick={handleNext}
               >
                 Skip this step
               </button>
