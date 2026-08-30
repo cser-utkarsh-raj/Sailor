@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
 import {
   User,
   SailorProfile,
@@ -74,6 +74,47 @@ export function SailorProvider({ children }: { children: ReactNode }) {
   const [currentVoyage, setCurrentVoyage] = useState<Voyage | null>(null);
   const [achievements, setAchievements] = useState<Achievement[]>(achievementDefinitions);
   const [isOnboarded, setIsOnboarded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedOnboarded = localStorage.getItem('sailor_isOnboarded');
+      if (storedOnboarded === 'true') {
+        setIsOnboarded(true);
+      }
+      const storedProfile = localStorage.getItem('sailor_currentProfile');
+      if (storedProfile) {
+        try { setCurrentProfile(JSON.parse(storedProfile)); } catch(e) {}
+      }
+      const storedUser = localStorage.getItem('sailor_currentUser');
+      if (storedUser) {
+        try { setCurrentUser(JSON.parse(storedUser)); } catch(e) {}
+      }
+      setIsLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      if (isOnboarded) {
+        localStorage.setItem('sailor_isOnboarded', 'true');
+      } else {
+        localStorage.removeItem('sailor_isOnboarded');
+      }
+    }
+  }, [isOnboarded, isLoaded]);
+
+  useEffect(() => {
+    if (isLoaded && currentProfile) {
+      localStorage.setItem('sailor_currentProfile', JSON.stringify(currentProfile));
+    }
+  }, [currentProfile, isLoaded]);
+
+  useEffect(() => {
+    if (isLoaded && currentUser) {
+      localStorage.setItem('sailor_currentUser', JSON.stringify(currentUser));
+    }
+  }, [currentUser, isLoaded]);
 
   const addCrewMember = useCallback((sailor: SailorProfile, metOn: string) => {
     const newMember: CrewMember = {

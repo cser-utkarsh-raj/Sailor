@@ -44,8 +44,16 @@ export default function ProfilePage() {
             className="ring-4 ring-white/20 shadow-xl"
           />
           <div className="flex-1 mt-2">
-            <h1 className="text-3xl font-heading font-bold mb-1">{currentProfile.sailorName}</h1>
-            <p className="text-ocean-100 flex items-center justify-center sm:justify-start gap-1.5 text-lg mb-4">
+            <div className="flex items-center justify-center sm:justify-start gap-3 mb-1">
+              <h1 className="text-3xl font-heading font-bold">{currentProfile.sailorName}</h1>
+              {!currentProfile.isAnonymous && (
+                <div className="flex items-center gap-1 bg-white/20 text-white px-2 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider">
+                  <Shield size={12} fill="currentColor" />
+                  Verified
+                </div>
+              )}
+            </div>
+            <p className="text-white/80 flex items-center justify-center sm:justify-start gap-1.5 text-lg mb-4">
               <span>{currentProfile.countryFlag}</span> {currentProfile.country}
             </p>
             <p className="italic text-white/90 max-w-xl text-sm sm:text-base leading-relaxed">

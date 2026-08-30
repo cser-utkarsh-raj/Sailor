@@ -86,11 +86,15 @@ const INTERESTS = [
 
 export default function OnboardingPage() {
   const router = useRouter();
-  const { setIsOnboarded, setCurrentProfile, currentUser } = useSailor();
+  const { setIsOnboarded, setCurrentProfile, currentUser, setCurrentUser } = useSailor();
   
   const [step, setStep] = useState(0);
   
   // Form State
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showAuth, setShowAuth] = useState(false);
+  
   const [name, setName] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [country, setCountry] = useState<{name: string, flag: string} | null>(null);
@@ -99,9 +103,25 @@ export default function OnboardingPage() {
   const [interests, setInterests] = useState<string[]>([]);
 
   const handleNext = () => setStep((s) => Math.min(s + 1, 5));
-  const handleBack = () => setStep((s) => Math.max(s - 1, 0));
+  const handleBack = () => {
+    if (step === 0 && showAuth) {
+      setShowAuth(false);
+      return;
+    }
+    setStep((s) => Math.max(s - 1, 0));
+  };
 
   const handleComplete = () => {
+    if (email) {
+      setCurrentUser({
+        id: currentUser?.id || `user-${Date.now()}`,
+        email: email,
+        createdAt: new Date().toISOString(),
+        lastLoginAt: new Date().toISOString(),
+        moderationStatus: 'normal'
+      });
+    }
+
     setCurrentProfile({
       userId: currentUser?.id || `user-${Date.now()}`,
       sailorName: name || "Anonymous Sailor",
@@ -140,7 +160,7 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden flex flex-col">
+    <div className="relative min-h-screen bg-[#FDFBF7] overflow-hidden flex flex-col">
       {/* Progress Bar */}
       {step > 0 && (
         <div className="absolute top-8 left-0 right-0 z-50 flex justify-center gap-2">
@@ -148,7 +168,7 @@ export default function OnboardingPage() {
             <div 
               key={i} 
               className={`h-2 w-2 rounded-full transition-colors ${
-                i <= step ? "bg-ocean-500" : "bg-ocean-100"
+                i <= step ? "bg-slate-800" : "bg-slate-200"
               }`} 
             />
           ))}
@@ -156,12 +176,12 @@ export default function OnboardingPage() {
       )}
 
       {/* Back Button */}
-      {step > 0 && step < 5 && (
+      {(step > 0 || showAuth) && step < 5 && (
         <Button 
           variant="ghost" 
           size="sm" 
           onClick={handleBack}
-          className="absolute top-6 left-6 z-50 text-navy-600"
+          className="absolute top-6 left-6 z-50 text-slate-500 hover:text-slate-800"
         >
           <ChevronLeft className="w-5 h-5 mr-1" /> Back
         </Button>
@@ -169,28 +189,91 @@ export default function OnboardingPage() {
 
       <div className="flex-1 flex flex-col justify-center items-center px-6 relative z-10 w-full max-w-lg mx-auto">
         <AnimatePresence mode="wait">
-          {step === 0 && (
+          {step === 0 && !showAuth && (
             <motion.div 
-              key="step0"
+              key="step0-choice"
               variants={stepVariants}
               initial="initial"
               animate="animate"
               exit="exit"
-              className="text-center w-full flex flex-col items-center"
+              className="text-center w-full flex flex-col items-center max-w-sm"
             >
-              <SailorLogo className="w-20 h-20 text-ocean-500 mb-6" />
-              <h1 className="font-heading font-extrabold text-3xl md:text-4xl text-navy-900 mb-3">
-                Welcome aboard, Sailor!
+              <SailorLogo className="w-16 h-16 text-slate-800 mb-6" />
+              <h1 className="font-heading font-extrabold text-3xl md:text-4xl text-slate-900 mb-4 tracking-tight">
+                Welcome aboard.
               </h1>
-              <p className="text-navy-600 text-lg mb-2">
-                Create your identity and set sail.
+              <p className="text-slate-500 text-sm mb-10 font-medium">
+                Choose how you want to navigate the sea.
               </p>
-              <p className="text-navy-500 italic text-sm mb-10">
-                You can meet people without revealing your real identity.
+              
+              <div className="flex flex-col gap-4 w-full">
+                <button 
+                  onClick={() => setShowAuth(true)}
+                  className="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-[2rem] py-4 px-6 flex flex-col items-center shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all hover:-translate-y-1"
+                >
+                  <span className="font-bold text-[11px] tracking-[0.2em] uppercase mb-1">Create Verified Account</span>
+                  <span className="text-xs text-slate-400 font-medium normal-case tracking-normal">Save progress, friends, and history</span>
+                </button>
+                
+                <button 
+                  onClick={() => {
+                    setIsAnonymous(true);
+                    handleNext();
+                  }}
+                  className="w-full bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 rounded-[2rem] py-4 px-6 flex flex-col items-center shadow-sm transition-all hover:-translate-y-1"
+                >
+                  <span className="font-bold text-[11px] tracking-[0.2em] uppercase mb-1">Surf Anonymously</span>
+                  <span className="text-xs text-slate-500 font-medium normal-case tracking-normal">Data stays on this browser only</span>
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {step === 0 && showAuth && (
+            <motion.div 
+              key="step0-auth"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="text-center w-full flex flex-col items-center max-w-sm"
+            >
+              <h2 className="font-heading font-extrabold text-2xl text-slate-900 mb-2">
+                Verified Account
+              </h2>
+              <p className="text-slate-500 text-sm mb-8">
+                Your email is never shared with anyone you meet.
               </p>
-              <Button size="lg" className="w-full sm:w-auto px-12" onClick={handleNext}>
-                Let's Begin
-              </Button>
+              
+              <div className="flex flex-col gap-4 w-full mb-8">
+                <input 
+                  type="email"
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  placeholder="Email address" 
+                  className="w-full text-center text-sm py-5 rounded-2xl bg-white border border-slate-200 outline-none focus:border-slate-400 transition-colors"
+                />
+                <input 
+                  type="password"
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)} 
+                  placeholder="Password" 
+                  className="w-full text-center text-sm py-5 rounded-2xl bg-white border border-slate-200 outline-none focus:border-slate-400 transition-colors"
+                />
+              </div>
+
+              <button 
+                className="w-full rounded-[2rem] bg-slate-900 text-white hover:bg-slate-800 font-bold py-4 text-[11px] uppercase tracking-[0.2em] shadow-md hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => {
+                  if (email && password) {
+                    setIsAnonymous(false);
+                    handleNext();
+                  }
+                }}
+                disabled={!email || !password}
+              >
+                Sign In & Continue
+              </button>
             </motion.div>
           )}
 
