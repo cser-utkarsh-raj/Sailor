@@ -42,37 +42,71 @@ export default function SeaPage() {
         </div>
       </header>
 
-      {/* Main CTA Section (Ocean Band style) */}
-      <section className="relative w-full rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(2,132,199,0.08)]">
-        {/* Gradient ocean background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#e0f2fe] via-[#bae6fd] to-[#7dd3fc] z-0" />
-        
-        {/* Subtle animated wave lines */}
-        <svg className="absolute bottom-0 left-0 w-full h-32 opacity-30" viewBox="0 0 1440 100" preserveAspectRatio="none">
-          <path d="M0,50 C200,80 400,20 600,60 C800,90 1000,30 1200,65 C1350,80 1400,50 1440,60 L1440,100 L0,100 Z" fill="none" stroke="#0284c7" strokeWidth="2"/>
-        </svg>
-
-        <div className="relative z-10 p-10 md:p-14 lg:p-16 flex flex-col md:flex-row items-center md:items-end justify-between gap-10">
-          <div className="max-w-xl text-center md:text-left">
-            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.25em] text-sky-800/70">Open waters / 01</p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold tracking-tight text-slate-800 uppercase leading-[1.1] mb-4">
-              Ready to meet<br />someone new?
-            </h2>
-            <p className="max-w-md text-slate-600 font-medium text-sm lg:text-base mx-auto md:mx-0">
-              Set sail into the unknown and match with a random sailor. No algorithms, just the ocean.
-            </p>
-            
-            <p className="text-xs font-semibold uppercase tracking-widest text-sky-700/80 mt-8 flex items-center justify-center md:justify-start gap-2">
-              <Waves size={16} /> {activeSailorsCount.toLocaleString()} sailors currently at sea
-            </p>
-          </div>
+      {/* Main CTA Section (Launch Graphic style) */}
+      <section className="relative w-full rounded-[2.5rem] overflow-hidden shadow-sm bg-[#FDFBF7] min-h-[500px] flex items-center">
+        {/* Background Image with Mask */}
+        <div className="absolute inset-0 z-0">
+          <svg className="absolute w-0 h-0">
+            <defs>
+              <clipPath id="sea-mask-desktop" clipPathUnits="objectBoundingBox">
+                <path d="
+                  M 0.35,0
+                  L 1,0
+                  L 1,1
+                  L 0.15,1
+                  C 0.20,0.93 0.25,0.86 0.30,0.78
+                  C 0.35,0.70 0.32,0.63 0.34,0.56
+                  C 0.36,0.49 0.40,0.42 0.38,0.35
+                  C 0.36,0.28 0.34,0.22 0.38,0.14
+                  C 0.40,0.08 0.34,0.04 0.35,0
+                  Z
+                " />
+              </clipPath>
+              <clipPath id="sea-mask-mobile" clipPathUnits="objectBoundingBox">
+                <path d="
+                  M 0,0
+                  L 1,0
+                  L 1,0.7
+                  C 0.7,0.85 0.5,0.55 0.3,0.7
+                  C 0.1,0.85 0.05,0.6 0,0.8
+                  Z
+                " />
+              </clipPath>
+            </defs>
+          </svg>
           
-          <div className="shrink-0">
-            <Button 
-              className="rounded-full bg-slate-900 text-white hover:bg-slate-800 font-bold px-10 py-4 text-[11px] uppercase tracking-[0.2em] border-none shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2"
-              onClick={() => router.push('/voyage/matching')}
-            >
-              Set sail <ArrowUpRight size={16} />
+          <div
+            className="hidden md:block absolute inset-0 w-full h-full bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/coastal_ship_hero.jpg')",
+              clipPath: "url(#sea-mask-desktop)",
+              WebkitClipPath: "url(#sea-mask-desktop)",
+            }}
+          />
+          <div
+            className="block md:hidden absolute top-0 left-0 w-full h-[60%] bg-cover bg-[center_top]"
+            style={{
+              backgroundImage: "url('/coastal_ship_hero.jpg')",
+              clipPath: "url(#sea-mask-mobile)",
+              WebkitClipPath: "url(#sea-mask-mobile)",
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 p-10 md:p-14 lg:p-16 flex flex-col items-center md:items-start text-center md:text-left mt-40 md:mt-0">
+          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">Open waters / 01</p>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight text-slate-800 uppercase leading-[0.9] mb-6">
+            Ready to meet<br />someone new?
+          </h2>
+          <p className="text-slate-500 font-semibold mb-8 max-w-sm">
+            Set sail into the unknown and match with a random sailor. No algorithms, just the ocean.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <Button onClick={() => router.push('/voyage')} className="rounded-full bg-slate-900 text-white hover:bg-slate-800 font-bold px-8 py-4 text-[11px] uppercase tracking-[0.2em] border-none shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
+              Go Offshore
+            </Button>
+            <Button onClick={() => router.push('/islands')} className="rounded-full bg-white text-slate-800 border-2 border-slate-200 hover:border-slate-300 font-bold px-8 py-4 text-[11px] uppercase tracking-[0.2em] shadow-sm hover:shadow transition-all">
+              Browse Islands
             </Button>
           </div>
         </div>

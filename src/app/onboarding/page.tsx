@@ -54,6 +54,15 @@ function getCountrySuggestions(query: string): { name: string; flag: string }[] 
     .map(([name, flag]) => ({ name, flag }));
 }
 
+const TITLES = [
+  { name: "Captain", flag: "⚓" },
+  { name: "Navigator", flag: "🧭" },
+  { name: "Explorer", flag: "🔭" },
+  { name: "Drifter", flag: "🌊" },
+  { name: "Observer", flag: "👁️" },
+  { name: "Voyager", flag: "⛵" },
+];
+
 const LANGUAGES = [
   "English", "Hindi", "Spanish", "French", "Japanese", "Korean",
   "Portuguese", "German", "Arabic", "Mandarin", "Russian", "Italian"
@@ -284,33 +293,23 @@ export default function OnboardingPage() {
               initial="initial"
               animate="animate"
               exit="exit"
-              className="w-full flex flex-col items-center text-center"
+              className="w-full flex flex-col items-center text-center max-w-sm"
             >
-              <h2 className="font-heading font-bold text-2xl md:text-3xl text-navy-900 mb-8">
+              <h2 className="font-heading font-extrabold text-2xl md:text-3xl text-slate-900 mb-8 tracking-tight">
                 Choose your Sailor name
               </h2>
               <Input 
                 value={name} 
                 onChange={(e) => setName(e.target.value)} 
                 placeholder="e.g. Captain Luna" 
-                className="w-full text-center text-lg py-6 mb-6"
+                className="w-full text-center text-lg py-6 mb-2 rounded-2xl bg-white border border-slate-200 outline-none focus:border-slate-400 transition-colors"
               />
-              <label className="flex items-center gap-3 cursor-pointer mb-2">
-                <input 
-                  type="checkbox" 
-                  checked={isAnonymous} 
-                  onChange={(e) => setIsAnonymous(e.target.checked)}
-                  className="w-5 h-5 rounded border-navy-300 text-ocean-500 focus:ring-ocean-500"
-                />
-                <span className="font-medium text-navy-700">Stay Anonymous</span>
-              </label>
-              <p className="text-navy-500 text-sm mb-10">Your real name is never shared</p>
+              <p className="text-slate-500 font-medium text-sm mb-10">Your real name is never shared.</p>
               
               <Button 
-                size="lg" 
-                className="w-full" 
+                className="w-full rounded-[2rem] bg-slate-900 text-white hover:bg-slate-800 font-bold py-4 text-[11px] uppercase tracking-[0.2em] shadow-md hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={handleNext}
-                disabled={!name.trim() && !isAnonymous}
+                disabled={!name.trim()}
               >
                 Continue
               </Button>
@@ -324,74 +323,41 @@ export default function OnboardingPage() {
               initial="initial"
               animate="animate"
               exit="exit"
-              className="w-full flex flex-col items-center"
+              className="w-full flex flex-col items-center max-w-md"
             >
-              <h2 className="font-heading font-bold text-2xl md:text-3xl text-navy-900 mb-8 text-center">
-                Where are you from?
+              <h2 className="font-heading font-extrabold text-2xl md:text-3xl text-slate-900 mb-8 tracking-tight text-center">
+                Select your Title
               </h2>
               
-              <div className="w-full max-w-sm mb-4 relative">
-                <Input 
-                  placeholder="Type your country..." 
-                  value={countrySearch}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    setCountrySearch(val);
-                    const found = findCountryFlag(val);
-                    if (found && found.flag !== "🏴‍☠️") {
-                      setCountry(found);
-                    } else {
-                      setCountry(null);
-                    }
-                  }}
-                  className="text-lg"
-                />
-                
-                {/* Live suggestions */}
-                {countrySearch.trim() && !country && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-ocean-100 rounded-xl shadow-lg overflow-hidden z-20">
-                    {getCountrySuggestions(countrySearch).map((c) => (
-                      <button
-                        key={c.name}
-                        onClick={() => {
-                          setCountry(c);
-                          setCountrySearch(c.name);
-                        }}
-                        className="w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-ocean-50 transition-colors border-b border-ocean-50 last:border-b-0"
-                      >
-                        <span className="text-2xl">{c.flag}</span>
-                        <span className="font-medium text-navy-800">{c.name}</span>
-                      </button>
-                    ))}
-                    {getCountrySuggestions(countrySearch).length === 0 && (
-                      <div className="px-4 py-3 text-navy-500 text-sm">No matches found — you&apos;ll sail as a pirate 🏴‍☠️</div>
-                    )}
-                  </div>
-                )}
+              <div className="grid grid-cols-2 gap-4 w-full mb-10">
+                {TITLES.map((t) => (
+                  <button
+                    key={t.name}
+                    onClick={() => {
+                      setCountry({ name: t.name, flag: t.flag });
+                      handleNext();
+                    }}
+                    className={`flex flex-col items-center justify-center gap-2 py-6 rounded-[2rem] border transition-all ${
+                      country?.name === t.name 
+                        ? 'border-slate-800 bg-slate-50' 
+                        : 'border-slate-200 bg-white hover:border-slate-300'
+                    }`}
+                  >
+                    <span className="text-4xl mb-1">{t.flag}</span>
+                    <span className="font-bold text-[11px] tracking-widest uppercase text-slate-800">{t.name}</span>
+                  </button>
+                ))}
               </div>
-
-              {/* Selected country display */}
-              {country && (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex items-center gap-3 bg-ocean-50 border border-ocean-200 rounded-2xl px-6 py-4 mb-6"
-                >
-                  <span className="text-4xl">{country.flag}</span>
-                  <span className="font-heading font-bold text-xl text-navy-900">{country.name}</span>
-                </motion.div>
-              )}
               
-              <p className="text-navy-500 text-sm mb-8 text-center">Your exact location is never shared</p>
-              
-              <Button 
-                size="lg" 
-                className="w-full" 
-                onClick={handleNext}
-                disabled={!country}
+              <button 
+                className="text-slate-500 font-semibold uppercase tracking-widest text-[10px] hover:text-slate-800 transition-colors" 
+                onClick={() => {
+                  if (!country) setCountry({ name: 'Drifter', flag: '🌊' });
+                  handleNext();
+                }}
               >
-                Continue
-              </Button>
+                Skip this step
+              </button>
             </motion.div>
           )}
 
