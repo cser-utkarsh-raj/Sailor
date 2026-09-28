@@ -8,22 +8,23 @@ Sailor is being developed as a flagship product in the **.dot** ecosystem.
 
 ## 🧭 The Sailor Experience
 
-```text
-🏖️ Shore → 👤 Create Sailor → 🌊 Sea
-                              ├── 🧭 Voyage  → meet someone
-                              ├── 🏝️ Island  → find people around an interest
-                              └── 📨 Bottle  → reach someone asynchronously
-                                         ↓
-                                      💬 Talk
-                                      ↙     ↘
-                                   Leave    ⚓ Aboard
-                                              ↓
-                                           🫂 Crew
-                                              ↓
-                                        🗺️ Journey
-                                              ↓
-                                          🌊 Sail again
+```mermaid
+flowchart LR
+    SHORE["🏖️ Shore"] --> ID["👤 Create Sailor"]
+    ID --> SEA["🌊 Sea"]
+    SEA --> V["🧭 Voyage"]
+    SEA --> I["🏝️ Island"]
+    SEA --> B["📨 Bottle"]
+    V --> C["💬 Conversation"]
+    I --> C
+    B --> C
+    C --> LEAVE["Leave"]
+    C --> CREW["⚓ Crew"]
+    CREW --> MAP["🗺️ Journey / Log"]
+    MAP --> SEA
 ```
+
+**How to read it:** Sailor is a discovery loop. The Sea exposes several ways to meet people; conversation is the central human interaction; Crew and the Log turn worthwhile encounters into continuing relationships.
 
 | Concept | Purpose |
 |---|---|
@@ -36,6 +37,22 @@ Sailor is being developed as a flagship product in the **.dot** ecosystem.
 | 💬 **Conversation** | The actual human connection |
 | ⚓ **Crew** | People you choose to keep around |
 | 🗺️ **Map / Log** | Your record of people and experiences |
+
+## 🔄 Conversation State Flow
+
+```mermaid
+stateDiagram-v2
+    [*] --> Discovery
+    Discovery --> Conversation: meet / match
+    Discovery --> Bottle: asynchronous reach-out
+    Discovery --> Island: shared interest
+    Bottle --> Conversation: reply
+    Island --> Conversation: connect
+    Conversation --> Leave: end connection
+    Conversation --> Crew: keep connection
+    Crew --> Journey: shared history
+    Journey --> Discovery: sail again
+```
 
 ## ✨ Current Product Surface
 
@@ -125,9 +142,9 @@ Sailor/
 │       ├── map/
 │       ├── profile/
 │       └── sea/
-├── public/               # PWA assets and visual media
-├── PRODUCT_VISION.md     # Product philosophy and release plan
-└── ARCHITECTURE.md       # Technical architecture
+├── public/
+├── PRODUCT_VISION.md
+└── ARCHITECTURE.md
 ```
 
 ## 🌐 Part of .dot
