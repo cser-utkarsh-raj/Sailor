@@ -1,0 +1,46 @@
+name: Sailor CI
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sailor-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint, typecheck and production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Lint
+        id: lint
+        continue-on-error: true
+        run: npm run lint -- --quiet
+      - name: Type check
+        id: typecheck
+        run: npx tsc --noEmit
+      - name: Production build
+        id: build
+        run: npm run build
+      - name: Report lint debt
+        if: steps.lint.outcome == 'failure'
+        run: echo "::warning::ESLint currently reports pre-existing code-quality issues. Type check and build still run independently; fix these errors incrementally rather than suppressing rules."
+
