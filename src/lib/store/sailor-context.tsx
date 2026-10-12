@@ -78,21 +78,20 @@ export function SailorProvider({ children }: { children: ReactNode }) {
   const [activeSailorsCount] = useState(() => 184 + Math.floor(Math.random() * 50));
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedOnboarded = localStorage.getItem('sailor_isOnboarded');
-      if (storedOnboarded === 'true') {
-        setIsOnboarded(true);
-      }
-      const storedProfile = localStorage.getItem('sailor_currentProfile');
-      if (storedProfile) {
-        try { setCurrentProfile(JSON.parse(storedProfile)); } catch(e) {}
-      }
-      const storedUser = localStorage.getItem('sailor_currentUser');
-      if (storedUser) {
-        try { setCurrentUser(JSON.parse(storedUser)); } catch(e) {}
-      }
-      setIsLoaded(true);
+    if (typeof window === 'undefined') return;
+
+    const storedOnboarded = localStorage.getItem('sailor_isOnboarded');
+    const storedProfile = localStorage.getItem('sailor_currentProfile');
+    const storedUser = localStorage.getItem('sailor_currentUser');
+
+    if (storedOnboarded === 'true') setIsOnboarded(true);
+    if (storedProfile) {
+      try { setCurrentProfile(JSON.parse(storedProfile)); } catch { /* ignore invalid cached profile */ }
     }
+    if (storedUser) {
+      try { setCurrentUser(JSON.parse(storedUser)); } catch { /* ignore invalid cached user */ }
+    }
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
