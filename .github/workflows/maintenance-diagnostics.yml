@@ -1,0 +1,73 @@
+name: Maintenance Diagnostics
+
+on:
+  schedule:
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Sailor CI"]
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: sailor-diagnostics-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  diagnostics:
+    if: >-
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion == 'failure' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # checkout v7
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Initialize diagnostic report
+        run: |
+          printf 'Repository: %s\nBranch: main\nEvent: %s\n' "${{ github.repository }}" "${{ github.event_name }}" > maintenance-summary.txt
+          : > upstream-failure.log
+      - name: Capture failed CI logs
+        if: github.event_name == 'workflow_run'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_NAME: ${{ github.event.workflow_run.name }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          printf 'Failed workflow: %s\nRun: %s\n' "$RUN_NAME" "$RUN_URL" >> maintenance-summary.txt
+          gh run view "$RUN_ID" --log-failed > upstream-failure.log 2>&1 || true
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # setup-node v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        continue-on-error: true
+        run: npm run lint -- --quiet
+      - name: Type check
+        run: npx tsc --noEmit
+      - name: Production build
+        run: npm run build
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # upload-artifact v4
+        with:
+          name: sailor-diagnostics-${{ github.run_id }}
+          path: |
+            maintenance-summary.txt
+            upstream-failure.log
+          if-no-files-found: warn
