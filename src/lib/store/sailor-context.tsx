@@ -75,7 +75,6 @@ export function SailorProvider({ children }: { children: ReactNode }) {
   const [achievements, setAchievements] = useState<Achievement[]>(achievementDefinitions);
   const [isOnboarded, setIsOnboarded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [activeSailorsCount] = useState(() => 184 + Math.floor(Math.random() * 50));
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -128,6 +127,7 @@ export function SailorProvider({ children }: { children: ReactNode }) {
     setCrew((prev) => [...prev, newMember]);
   }, []);
 
+  const activeSailorsCount = 184 + Math.floor(Math.random() * 50);
 
   return (
     <SailorContext.Provider
