@@ -6,6 +6,16 @@ Sailor is a social-discovery platform designed to make meeting strangers feel na
 
 Sailor is being developed as a flagship product in the **.dot** ecosystem.
 
+> **Preview status:** This repository is a front-end prototype. It uses sample sailors and simulated conversations; account sign-in, real-time messaging, and server-backed persistence are not connected. Your demo profile is stored in your browser. Do not enter a real password.
+
+## What works in the preview
+
+- Create a local demo profile and explore the Sailor interface.
+- Try the sample voyage, conversation, crew, islands, bottles, and map flows.
+- Install the web app where the browser supports PWA installation.
+
+These flows are for product exploration. Sample people and replies are not real users, and actions do not contact anyone.
+
 ## 🧭 The Sailor Experience
 
 ```mermaid
@@ -130,6 +140,8 @@ npm start
 npm run lint
 ```
 
+For a fresh local preview, clear this site's browser storage. The demo profile and onboarding choice are kept in `localStorage`.
+
 ## 🏗️ Structure
 
 ```text
@@ -152,3 +164,4 @@ Sailor/
 Sailor is a flagship product within **.dot**, an ecosystem spanning social products, developer infrastructure, and lightweight public tools.
 
 > **Sailor · Presented by .dot**
+
