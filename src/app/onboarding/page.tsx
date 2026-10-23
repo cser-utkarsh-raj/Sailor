@@ -221,8 +221,7 @@ export default function OnboardingPage() {
                 
                 <button 
                   onClick={() => {
-                    setIsAnonymous(true);
-                    handleNext();
+                    setShowAuth(true);
                   }}
                   className="w-full bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 rounded-[2rem] py-4 px-6 flex flex-col items-center shadow-sm transition-all hover:-translate-y-1"
                 >
