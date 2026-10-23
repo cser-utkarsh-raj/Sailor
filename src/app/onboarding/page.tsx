@@ -95,13 +95,11 @@ const INTERESTS = [
 
 export default function OnboardingPage() {
   const router = useRouter();
-  const { setIsOnboarded, setCurrentProfile, currentUser, setCurrentUser } = useSailor();
+  const { setIsOnboarded, setCurrentProfile } = useSailor();
   
   const [step, setStep] = useState(0);
   
   // Form State
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showAuth, setShowAuth] = useState(false);
   
   const [name, setName] = useState("");
@@ -122,18 +120,8 @@ export default function OnboardingPage() {
   };
 
   const handleComplete = () => {
-    if (email) {
-      setCurrentUser({
-        id: currentUser?.id || `user-${Date.now()}`,
-        email: email,
-        createdAt: new Date().toISOString(),
-        lastLoginAt: new Date().toISOString(),
-        moderationStatus: 'normal'
-      });
-    }
-
     setCurrentProfile({
-      userId: "mock-user-id",
+      userId: `demo-user-${Date.now()}`,
       sailorName: name || "Anonymous Sailor",
       isAnonymous,
       country: country?.name || "Unknown",
@@ -221,11 +209,14 @@ export default function OnboardingPage() {
               
               <div className="flex flex-col gap-4 w-full">
                 <button 
-                  onClick={() => setShowAuth(true)}
+                  onClick={() => {
+                    setIsAnonymous(true);
+                    handleNext();
+                  }}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-[2rem] py-4 px-6 flex flex-col items-center shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all hover:-translate-y-1"
                 >
-                  <span className="font-bold text-[11px] tracking-[0.2em] uppercase mb-1">Create Verified Account</span>
-                  <span className="text-xs text-slate-400 font-medium normal-case tracking-normal">Save progress, friends, and history</span>
+                  <span className="font-bold text-[11px] tracking-[0.2em] uppercase mb-1">Continue in Preview</span>
+                  <span className="text-xs text-slate-400 font-medium normal-case tracking-normal">No account needed · profile stays in this browser</span>
                 </button>
                 
                 <button 
@@ -235,8 +226,8 @@ export default function OnboardingPage() {
                   }}
                   className="w-full bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 rounded-[2rem] py-4 px-6 flex flex-col items-center shadow-sm transition-all hover:-translate-y-1"
                 >
-                  <span className="font-bold text-[11px] tracking-[0.2em] uppercase mb-1">Surf Anonymously</span>
-                  <span className="text-xs text-slate-500 font-medium normal-case tracking-normal">Data stays on this browser only</span>
+                  <span className="font-bold text-[11px] tracking-[0.2em] uppercase mb-1">About This Preview</span>
+                  <span className="text-xs text-slate-500 font-medium normal-case tracking-normal">See what is local and what is simulated</span>
                 </button>
               </div>
             </motion.div>
@@ -252,40 +243,20 @@ export default function OnboardingPage() {
               className="text-center w-full flex flex-col items-center max-w-sm"
             >
               <h2 className="font-heading font-extrabold text-2xl text-slate-900 mb-2">
-                Verified Account
+                A browser-only preview
               </h2>
-              <p className="text-slate-500 text-sm mb-8">
-                Your email is never shared with anyone you meet.
+              <p className="text-slate-500 text-sm mb-8 leading-relaxed">
+                Account sign-in and real messaging are not connected yet. Sailor uses sample sailors and conversations; your demo profile is stored in this browser. You do not need to enter an email or password.
               </p>
-              
-              <div className="flex flex-col gap-4 w-full mb-8">
-                <input 
-                  type="email"
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)} 
-                  placeholder="Email address" 
-                  className="w-full text-center text-sm py-5 rounded-2xl bg-white border border-slate-200 outline-none focus:border-slate-400 transition-colors"
-                />
-                <input 
-                  type="password"
-                  value={password} 
-                  onChange={(e) => setPassword(e.target.value)} 
-                  placeholder="Password" 
-                  className="w-full text-center text-sm py-5 rounded-2xl bg-white border border-slate-200 outline-none focus:border-slate-400 transition-colors"
-                />
-              </div>
 
               <button 
                 className="w-full rounded-[2rem] bg-slate-900 text-white hover:bg-slate-800 font-bold py-4 text-[11px] uppercase tracking-[0.2em] shadow-md hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={() => {
-                  if (email && password) {
-                    setIsAnonymous(false);
-                    handleNext();
-                  }
+                  setIsAnonymous(true);
+                  handleNext();
                 }}
-                disabled={!email || !password}
               >
-                Sign In & Continue
+                Continue without an account
               </button>
             </motion.div>
           )}
@@ -562,3 +533,4 @@ export default function OnboardingPage() {
     </div>
   );
 }
+
